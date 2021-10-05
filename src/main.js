@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 import TableRestaurants from "./components/TableRestaurants";
 import DetailsRestaurant from "./components/DetailsRestaurant";
@@ -11,6 +13,7 @@ import DetailsRestaurant from "./components/DetailsRestaurant";
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
+Vue.use(Vuetify);
 
 const router = new VueRouter({
   routes: [
