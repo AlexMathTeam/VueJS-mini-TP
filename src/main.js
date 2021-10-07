@@ -7,8 +7,6 @@ import 'vue-material/dist/theme/default.css';
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-import TableRestaurants from "./components/TableRestaurants";
-import DetailsRestaurant from "./components/DetailsRestaurant";
 import HelloWord from "./components/HelloWorld";
 
 Vue.config.productionTip = false;
@@ -20,15 +18,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: TableRestaurants,
-    },
-    {
-      path: '/hello',
       component: HelloWord,
-    },
-    {
-      path: '/restaurant/:id',
-      component: DetailsRestaurant
     },
     {
       path: '*',

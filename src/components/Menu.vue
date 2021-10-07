@@ -6,6 +6,12 @@
     tile
   >
     <v-toolbar dense >
+      <v-avatar>
+      <img
+        src="../assets/logo.png"
+        alt="John"
+      >
+    </v-avatar>
       <v-spacer></v-spacer>
 
       <v-text-field
@@ -21,17 +27,17 @@
       <v-spacer></v-spacer>
 
       <v-btn elevation="0" @click="goTo('/')">
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-home</v-icon>
         <span>Accueil</span>
       </v-btn>
 
       <v-btn elevation="0" @click="goTo('/hello')">
-        <v-icon>mdi-heart</v-icon>
+        <v-icon>mdi-silverware-fork-knife</v-icon>
         <span>Les restaurants</span>
       </v-btn>
 
       <v-btn elevation="0">
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon>mdi-map-marker</v-icon>
         <span>Autour de vous</span>
       </v-btn>
     </v-toolbar>
