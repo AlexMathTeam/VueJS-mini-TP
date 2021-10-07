@@ -9,6 +9,7 @@ import 'vuetify/dist/vuetify.min.css'
 
 import TableRestaurants from "./components/TableRestaurants";
 import DetailsRestaurant from "./components/DetailsRestaurant";
+import HelloWord from "./components/HelloWorld";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -20,6 +21,10 @@ const router = new VueRouter({
     {
       path: '/',
       component: TableRestaurants,
+    },
+    {
+      path: '/hello',
+      component: HelloWord,
     },
     {
       path: '/restaurant/:id',
