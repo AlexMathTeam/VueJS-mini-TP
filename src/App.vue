@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <header class="menu">
-      <router-link to="/" tag="button">Home</router-link>
-      <router-link to="/restaurant" tag="button">Détail restaurant</router-link>
-    </header>
-
+    <Menu></Menu>
+    
     <main>
       <router-view></router-view>
     </main>
@@ -12,12 +9,15 @@
 </template>
 
 <script>
+import Menu from './components/Menu.vue'
 
 export default {
   name: 'App',
   components: {
+    Menu
   }
-}
+  
+    }
 
 </script>
 
@@ -28,7 +28,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 90px;
+  
 }
 
 .menu {
@@ -54,4 +54,5 @@ export default {
 .menu > button:hover {
   background: #2c3e50;
 }
+
 </style>

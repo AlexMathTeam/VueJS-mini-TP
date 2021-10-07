@@ -35,5 +35,8 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  el: '#app',
+  vuetify: new Vuetify(),
+  
   render: h => h(App),
 }).$mount('#app')

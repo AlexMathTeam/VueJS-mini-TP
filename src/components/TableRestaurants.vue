@@ -1,4 +1,5 @@
 <template>
+
   <div class="container-table">
     <form @submit.prevent="ajouterRestaurant($event)">
       <label>
@@ -65,6 +66,7 @@
       </md-table-row>
     </md-table>
   </div>
+  
 </template>
 
 
