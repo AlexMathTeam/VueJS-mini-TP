@@ -14,7 +14,7 @@ export default {
   name: 'App',
   components: {
     Menu,
-  }
+  },
   
 }
 
@@ -53,6 +53,10 @@ export default {
 
 .menu > button:hover {
   background: #2c3e50;
+}
+
+main {
+  margin-top: 90px;
 }
 
 </style>
