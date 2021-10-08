@@ -3,17 +3,21 @@
     <Menu></Menu>
     <main>
       <router-view></router-view>
+      <Recommandation></Recommandation>
+    
     </main>
   </div>
 </template>
 
 <script>
 import Menu from './components/Menu.vue'
+import Recommandation from './components/Recommandation.vue'
 
 export default {
   name: 'App',
   components: {
-    Menu
+    Menu,
+    Recommandation
   }
   
     }
