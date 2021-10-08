@@ -1,8 +1,9 @@
 <template>
-  <v-card color="grey lighten-4" flat height="200px" tile >
+  <header class="container-menu">
+    <v-card color="grey lighten-4" flat height="200px" tile>
     <v-toolbar dense >
       <v-avatar>
-        <img src="../../../assets/logo.png" alt="John"/>
+        <img src="../../../assets/logo.png"/>
       </v-avatar>
 
       <v-spacer></v-spacer>
@@ -20,6 +21,7 @@
       
     </v-toolbar>
   </v-card>
+  </header>
 </template>
 
 <script>
@@ -56,4 +58,12 @@ export default {
   .theme--light.v-btn.v-btn--has-bg {
     background-color: #fff !important;
   }
+  .container-menu{
+    position: fixed;
+    top : 0;
+    left: 0;
+    width: 100vw;
+    min-width: max-content;
+  }
+
 </style>

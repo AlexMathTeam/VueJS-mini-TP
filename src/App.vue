@@ -39,6 +39,7 @@ export default {
   width: 100vw;
   background: black;
   border-bottom: 1px black solid;
+  
 }
 
 .menu > button {

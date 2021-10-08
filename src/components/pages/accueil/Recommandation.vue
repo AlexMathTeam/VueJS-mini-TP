@@ -1,23 +1,32 @@
 <template>
-    <v-card
-    class="mx-auto"
-    max-width="434"
-    tile
-    >
-    <v-img
-    height="100%"
-    src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-    >
-    </v-img>
-    </v-card>
+  <v-card class="mx-auto" max-width="300" tile>
+    <div @click="goTo(route)">
+      <v-img
+        max-height="250"
+        max-width="300"
+        :src="require('../../../assets/restaurant.png')"
+      >
+      </v-img>
+      <span>Restaurant Miam Miam</span>
+      <br />
+      <span>Cuisine Française</span>
+    </div>
+  </v-card>
 </template>
 
 <script>
 export default {
-    name: 'Recommandation',
-}
+  name: "Recommandation",
+  data: () => ({
+    route: "/restaurants",
+  }),
+  methods: {
+    goTo(route) {
+      this.$router.push(route);
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
