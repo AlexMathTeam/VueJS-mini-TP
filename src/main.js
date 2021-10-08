@@ -1,24 +1,31 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from "vue-router";
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.min.css';
-import 'vue-material/dist/theme/default.css';
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 
-import HelloWord from "./components/HelloWorld";
+//Components
+import Accueil from './components/pages/accueil/Accueil';
+import GestionRestaurants from './components/pages/gestionRestaurants/GestionRestaurants';
+import FindRestaurants from './components/pages/findRestaurants/FindRestaurants';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-Vue.use(VueMaterial);
 Vue.use(Vuetify);
 
 const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: HelloWord,
+      component: Accueil,
+    },
+    {
+      path: '/restaurants',
+      component: GestionRestaurants,
+    },
+    {
+      path: '/trouver',
+      component: FindRestaurants,
     },
     {
       path: '*',
