@@ -9,34 +9,15 @@ import Accueil from './components/pages/accueil/Accueil';
 import GestionRestaurants from './components/pages/gestionRestaurants/GestionRestaurants';
 import FindRestaurants from './components/pages/findRestaurants/FindRestaurants';
 
+//Modules
+import Routes from './modules/Routes';
+
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 Vue.use(Vuetify);
 
-const router = new VueRouter({
-  routes: [
-    {
-      path: '/',
-      component: Accueil,
-    },
-    {
-      path: '/restaurants',
-      component: GestionRestaurants,
-    },
-    {
-      path: '/trouver',
-      component: FindRestaurants,
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ],
-  mode: 'history'
-});
-
 new Vue({
-  router,
+  Routes,
   el: '#app',
   vuetify: new Vuetify(),
   
