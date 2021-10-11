@@ -8,6 +8,7 @@ import 'vuetify/dist/vuetify.min.css';
 import Accueil from './components/pages/accueil/Accueil';
 import GestionRestaurants from './components/pages/gestionRestaurants/GestionRestaurants';
 import FindRestaurants from './components/pages/findRestaurants/FindRestaurants';
+import store from './store'
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -39,6 +40,6 @@ new Vue({
   router,
   el: '#app',
   vuetify: new Vuetify(),
-  
-  render: h => h(App),
+  store,
+  render: h => h(App)
 }).$mount('#app')
