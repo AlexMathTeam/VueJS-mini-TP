@@ -4,11 +4,6 @@ import VueRouter from "vue-router";
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 
-//Components
-import Accueil from './components/pages/accueil/Accueil';
-import GestionRestaurants from './components/pages/gestionRestaurants/GestionRestaurants';
-import FindRestaurants from './components/pages/findRestaurants/FindRestaurants';
-
 //Modules
 import Routes from './modules/Routes';
 
@@ -22,4 +17,4 @@ new Vue({
   vuetify: new Vuetify(),
   
   render: h => h(App),
-}).$mount('#app')
+}).$mount('#app');
