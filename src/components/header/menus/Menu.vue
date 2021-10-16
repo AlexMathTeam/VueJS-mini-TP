@@ -14,6 +14,7 @@
       hide-details
       prepend-inner-icon="mdi-magnify"
       label="Rechercher des restaurants "
+      v-if="$store.state.hideMenuSearch"
     ></v-text-field>
 
     <v-spacer></v-spacer>
@@ -54,6 +55,9 @@ export default {
       this.$router.push(route);
     },
   },
+  props: {
+    serchIsPresent: Boolean,
+  }
 };
 </script>
 
@@ -71,5 +75,9 @@ export default {
   padding-bottom: 10px;
   padding-top: 5px;
   min-width: max-content;
+}
+
+header{
+  z-index: 100000;
 }
 </style>

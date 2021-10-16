@@ -3,9 +3,10 @@ import App from './App.vue';
 import VueRouter from "vue-router";
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+import store from './store'
 
 //Modules
-import Router from './modules/Router';
+import router from './modules/Router';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -14,6 +15,7 @@ Vue.use(Vuetify);
 new Vue({
   el: '#app',
   vuetify: new Vuetify(),
-  router: Router,
-  render: h => h(App),
-}).$mount('#app');
+  store,
+  router,
+  render: h => h(App)
+}).$mount('#app')

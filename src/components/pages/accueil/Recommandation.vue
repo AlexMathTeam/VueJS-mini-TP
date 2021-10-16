@@ -1,5 +1,5 @@
 <template>
-  <div class="container-recommandation">
+  <div class="container-recommandation" @click="goTo(route)">
     <div class="container-img">
       <img src="../../../assets/restaurant.png" />
     </div>
@@ -35,6 +35,7 @@ export default {
     height: 100vh;
     min-height: 350px;
     max-height: 400px;
+    cursor: pointer;
   }
 
   .container-recommandation > .container-img {
@@ -43,6 +44,9 @@ export default {
 
   .container-recommandation > .container-img > img {
     width: 100%;
+  }
+  img{
+      border-radius: 5px;
   }
 
   .container-recommandation > .container-details {
