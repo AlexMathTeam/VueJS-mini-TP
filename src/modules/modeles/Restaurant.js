@@ -1,55 +1,67 @@
+import ObjIsNull from "../ObjIsNull";
+import Grade from "./Grade";
 import Adresse from "./Adresse";
 
 export default class Restaurant {
-    #_id;
-    #_name;
-    #_cuisine;
-    #_grades;
-    #_adresse;
-    #_restaurant_id;
+
+    #id;
+    #name;
+    #cuisine;
+    #grades;
+    #adresse;
+    #restaurant_id;
 
     constructor(id, name, cuisine, grades, adresse, restaurant_id) {
-        this.#_id = id;
-        this.#_name = name;
-        this.#_cuisine = cuisine;
-        this.#_grades = grades;
-        this.#_adresse = adresse;
-        this.#_restaurant_id = restaurant_id;
+        this.#id = id;
+        this.#name = name;
+        this.#cuisine = cuisine;
+        this.#grades = grades;
+        this.#adresse = adresse;
+        this.#restaurant_id = restaurant_id;
     }
 
     get id() {
-        return this.#_id ?? '';
+        return this.#id;
     }
 
     get name() {
-        return this.#_name ?? '';
+        return this.#name;
     }
 
     get cuisine() {
-        return this.#_cuisine ?? '';
+        return this.#cuisine;
     }
 
     get grades() {
-        return this.#_grades ?? [];
+        return this.#grades;
     }
 
     get adresse() {
-        return this.#_adresse ?? new Adresse();
+        return this.#adresse;
     }
 
     get restaurant_id() {
-        return this.#_restaurant_id ?? '';
+        return this.#restaurant_id;
     }
 
-    static convertTo(obj) {
-        if (!!obj) {
-            return Object.assign(new Restaurant(), obj);
+    static convertToRestaurant(obj) {
+        if (!ObjIsNull(obj)) {
+            return new Restaurant(
+                obj.id,
+                obj.name,
+                obj.cuisine,
+                Grade.convertToGrade(obj.grades),
+                Adresse.convertToAdresse(obj.adresse),
+                obj.restaurant_id
+            );
         }
+        return null;
     }
 
-    static convertsTo(arr) {
-        if (!!arr) {
-            return arr.map<Restaurant>((obj) => this.convertTo(obj));
+    static convertsToRestaurant(arr) {
+        if (!ObjIsNull(arr) && arr instanceof Array) {
+            return arr.map<Restaurant>((obj) => this.convertTo(obj)).filter(restau => !ObjIsNull(restau));
         }
+        return [];
     }
 }
