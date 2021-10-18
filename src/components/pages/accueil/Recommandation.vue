@@ -4,15 +4,17 @@
       <img src="../../../assets/restaurant.png" />
     </div>
     <div class="container-details">
-      <span>Restaurant Miam miam</span>
-      <span>Cuisine Française</span>
+      <span>{{restaurant.name}}</span>
+      <span>{{restaurant.cuisine}}</span>
     </div>
   </div>
 </template>
 
 <script>
+import Restaurant from '../../../modules/modeles/Restaurant';
 export default {
   name: "Recommandation",
+
   data: () => ({
     route: "/restaurants",
   }),
@@ -21,6 +23,9 @@ export default {
       this.$router.push(route);
     },
   },
+  props: {
+    restaurant: Restaurant,
+  }
 };
 </script>
 

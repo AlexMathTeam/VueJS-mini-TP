@@ -17,8 +17,9 @@
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
-        v-for="n in 4"
-        v-bind:key="n"
+        v-for="restaurant in random"
+        v-bind:key="restaurant"
+        :restaurant="restaurant"
       ></Recommandation>
     </div>
     <span class="span-accueil">Restaurant de la semaine</span>
@@ -36,61 +37,37 @@
 <script>
 import Filtres from "../../../modules/Filtres";
 import Recommandation from "./Recommandation";
-
+import { getRestaurants, getRestaurantsCount } from "../../../modules/api/RestaurantsAPI";
 export default {
   components: { Recommandation },
   name: "Accueil",
   filters: Filtres,
   data: () => ({
     n: 1,
-    restaurant: [
-      {
-        nom: "NomRestaurant1",
-        cuisine: "Cuisine1",
-      },
-      {
-        nom: "NomRestaurant2",
-        cuisine: "Cuisine2",
-      },
-      {
-        nom: "NomRestaurant3",
-        cuisine: "Cuisine3",
-      },
-      {
-        nom: "NomRestaurant4",
-        cuisine: "Cuisine4",
-      },
-      {
-        nom: "NomRestaurant5",
-        cuisine: "Cuisine5",
-      },
-      {
-        nom: "NomRestaurant6",
-        cuisine: "Cuisine6",
-      },
-      {
-        nom: "NomRestaurant7",
-        cuisine: "Cuisine7",
-      },
-      {
-        nom: "NomRestaurant8",
-        cuisine: "Cuisine8",
-      },
-    ],
+    random: [],
   }),
-  mounted() {},
+  mounted() {
+    getRestaurantsCount().then(res => {
+      const pageMax = Math.ceil(res/4);
+      const random = Math.floor(Math.random() * pageMax);
+      getRestaurants({page: random, pagesize: 4}).then(res => this.random = res.restaurants);
+    })
+
+    
+  },
   created() {
     window.addEventListener("scroll", this.barSearchHidden);
-    this.$store.state.hideMenuSearch= false;
+    this.$store.state.hideMenuSearch = false;
   },
   destroyed() {
     window.removeEventListener("scroll", this.barSearchHidden);
-     this.$store.state.hideMenuSearch= true;
+    this.$store.state.hideMenuSearch = true;
   },
   methods: {
     barSearchHidden() {
       const rect = this.$refs.divPhotoAcceuil.getBoundingClientRect();
-      this.$store.state.hideMenuSearch = rect.y + rect.height < 100 - rect.height;
+      this.$store.state.hideMenuSearch =
+        rect.y + rect.height < 100 - rect.height;
     },
   },
 };
@@ -129,7 +106,7 @@ export default {
 .barre-recherche-accueil.v-input {
   flex: none;
 }
-.container-barre-recherche-accueil{
+.container-barre-recherche-accueil {
   width: 90%;
   height: max-content;
 }
