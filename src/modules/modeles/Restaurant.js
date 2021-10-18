@@ -47,11 +47,11 @@ export default class Restaurant {
     static convertToRestaurant(obj) {
         if (!ObjIsNull(obj)) {
             return new Restaurant(
-                obj.id,
+                obj.id ?? obj._id,
                 obj.name,
                 obj.cuisine,
                 Grade.convertToGrade(obj.grades),
-                Adresse.convertToAdresse(obj.adresse),
+                Adresse.convertToAdresse(obj.address),
                 obj.restaurant_id
             );
         }
