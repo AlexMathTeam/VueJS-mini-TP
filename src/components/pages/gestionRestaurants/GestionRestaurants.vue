@@ -30,7 +30,7 @@ export default {
   methods: {
     searchRestaurants() {
       getRestaurants({page: this.page, pagesize: this.nbParPage, name: this.name}).then(
-        res => console.log(res)
+        res => this.restaurants = res.restaurants
       ).catch(err => {
         console.log(err)
       });

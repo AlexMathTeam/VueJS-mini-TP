@@ -11,6 +11,7 @@
 
 <script>
 import Restaurant from '../../modules/modeles/Restaurant';
+import Grade from '../../modules/modeles/Grade';
 
 export default {
     name: 'AfficheRestaurant',
@@ -32,12 +33,12 @@ export default {
             return this.restaurant.cuisine ?? '';
         },
         grade() {
-            return Array.from(this.restaurant.grades ?? []).reduce((previous = new Garde(), current = new Grade()) => (previous.score ?? 0) + (current.score ?? 0));
+            return Array.from(this.restaurant.grades ?? []).reduce((previous = new Grade(), current = new Grade()) => (previous.score ?? 0) + (current.score ?? 0));
         },
     },
     methods: {
         goToDetails() {
-            if (!!this.restaurant) {
+            if (this.restaurant) {
                 this.$router.push({name: 'restaurant', params: { id: this.id }});
             }
         }
