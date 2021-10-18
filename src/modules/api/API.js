@@ -6,7 +6,7 @@ export function get(path, params) {
     const link = `${url}/${path}`;
     let strParams = '';
 
-    if (!ObjIsNull(params)) {
+    if (!ObjIsNull(params) && !paramsEmpty(params)) {
         const paramsEntries = Object.entries(params);
         strParams = strParams.concat('?').concat(
             (paramsEntries.map(([key, value]) => {
@@ -35,6 +35,6 @@ export function post(path, params) {
     }).then(reponseJSON => reponseJSON.json());
 }
 
-/* function paramsEmpty(obj) {
-    return Object.keys(obj).length <= 0;
-} */
+function paramsEmpty(obj) {
+    return Object.values(obj).length <= 0;
+}

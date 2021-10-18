@@ -60,7 +60,7 @@ export default class Restaurant {
 
     static convertsToRestaurant(arr) {
         if (!ObjIsNull(arr) && arr instanceof Array) {
-            return arr.map<Restaurant>((obj) => this.convertTo(obj)).filter<Restaurant>(restau => !ObjIsNull(restau));
+            return arr.map((obj) => this.convertToRestaurant(obj)).filter(restau => !ObjIsNull(restau));
         }
         return [];
     }
