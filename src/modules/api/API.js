@@ -13,7 +13,14 @@ export function get(path, params) {
 
 export function post(path, params) {
     const formParams = new FormData();
-    Object.entries(params).forEach(([key, value]) => formParams.append(key, value));
+    const appendForm = ([key, value]) => formParams.append(key, value);
+    
+    if (params instanceof FormData) {
+        params.entries().foreach(appendForm);
+    }
+    else {
+        Object.entries(params).forEach(appendForm)
+    }
 
     return fetch(`${url}/${path}`, {
         method: 'POST',

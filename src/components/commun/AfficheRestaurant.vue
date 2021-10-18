@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Restaurant from '../../modules/modeles/Restaurant'
+import Restaurant from '../../modules/modeles/Restaurant';
 
 export default {
     name: 'AfficheRestaurant',
