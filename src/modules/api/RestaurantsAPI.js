@@ -7,3 +7,7 @@ export function getRestaurants(params) {
         restaurants: Restaurant.convertsToRestaurant(res.data ?? [])
     }));
 }
+
+export function getRestaurantsCount() {
+    return get('restaurants/count').then(res => res.data ?? 0);
+}
