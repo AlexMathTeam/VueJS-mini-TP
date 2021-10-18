@@ -1,14 +1,21 @@
 import ObjIsNull from "../ObjIsNull";
 
-const url = 'http://localhost:8080/api/';
+const url = 'http://localhost:8080/api';
 
 export function get(path, params) {
-    return fetch(`${url}/${path}` + (!ObjIsNull(params) && paramsEmpty(params) ? () => {
-        const paramsArray = Object.entries(params);
-        return '?'.concat(paramsArray.map(([key, value], index) => {
-            return `${key}=${value}` + index < paramsArray.length ? '&' : '';
-        }));
-    } : '')).then(reponseJSON => reponseJSON.json());
+    const link = `${url}/${path}`;
+    let strParams = '';
+
+    if (!ObjIsNull(params)) {
+        const paramsEntries = Object.entries(params);
+        strParams = strParams.concat('?').concat(
+            (paramsEntries.map(([key, value]) => {
+            return `${key}=${value}`;
+            }).join('&'))
+        );
+    }
+
+    return fetch(link + strParams).then(reponseJSON => reponseJSON.json());
 }
 
 export function post(path, params) {
@@ -28,6 +35,6 @@ export function post(path, params) {
     }).then(reponseJSON => reponseJSON.json());
 }
 
-function paramsEmpty(obj) {
+/* function paramsEmpty(obj) {
     return Object.keys(obj).length <= 0;
-}
+} */
