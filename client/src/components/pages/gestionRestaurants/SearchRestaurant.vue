@@ -1,6 +1,17 @@
 <template>
   <section class="container-search-restaurants">
-    <header></header>
+    <header>
+      <v-text-field
+        v-model="motsCle"
+        clearable
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="Rechercher des restaurants "
+        @change="debounceSearch()"
+      ></v-text-field>
+    </header>
     <main>
       <AfficheRestaurant
         v-for="restaurant in restaurants"
@@ -15,6 +26,8 @@
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
+import lodash from 'lodash';
+
 export default {
   name: "",
   components: {
@@ -22,9 +35,10 @@ export default {
   },
   data: () => ({
     page: 0,
-    nbParPage: 20,
+    nbParPage: 10,
     name: "",
     restaurants: [],
+    motsCle = '',
   }),
   mounted() {
     this.searchRestaurants();
@@ -41,6 +55,10 @@ export default {
           console.log(err);
         });
     },
+    debounceSearch: lodash.debounce(() => {
+      this.page = 0,
+      this.searchRestaurants();
+    }, 300),
   },
 };
 </script>
@@ -60,6 +78,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
 }
 </style>

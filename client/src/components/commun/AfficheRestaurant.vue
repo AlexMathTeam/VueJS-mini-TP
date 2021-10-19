@@ -1,10 +1,11 @@
 <template>
   <div class="container-aff-restau">
       <div class="container-image">
-          <!-- <img :src="urlPicture" :alt="alt"/> -->
+          <img src="../../assets/restaurant.jpg" alt="restaurant">
       </div>
       <div class="container-infos">
-
+          <p>{{ name }}</p>
+          <p>{{ cuisine }}</p>
       </div>
   </div>
 </template>
@@ -54,6 +55,8 @@ export default {
         border-radius: 5px;
         overflow: hidden;
         z-index: 0;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 4px rgb(0 0 0 / 50%);
     }
 
     .container-image {
@@ -63,6 +66,11 @@ export default {
         width: 100%;
         height: 100%;
         z-index: 1;
+    }
+
+    .container-image img {
+        width: 100%;
+        height: 100%;
     }
 
     .container-infos {
