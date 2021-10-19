@@ -26,8 +26,9 @@
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
-        v-for="n in 4"
-        v-bind:key="n"
+        v-for="restaurant in random"
+        v-bind:key="restaurant"
+        :restaurant="restaurant"
       ></Recommandation>
     </div>
     <span>{{ "teste filtre vuejs" | titlecase }}</span>
