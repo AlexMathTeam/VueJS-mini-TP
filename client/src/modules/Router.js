@@ -3,7 +3,7 @@ import GestionRestaurants from '../components/pages/gestionRestaurants/GestionRe
 import FindRestaurants from '../components/pages/findRestaurants/FindRestaurants';
 import RestaurantDetails from '../components/pages/restaurant/RestaurantDetails'
 import SearchRestaurant from '../components/pages/gestionRestaurants/SearchRestaurant';
-
+import AddRestaurant from '../components/pages/gestionRestaurants/AddRestaurant'
 import VueRouter from 'vue-router';
 
 const routes = new VueRouter({
@@ -19,6 +19,10 @@ const routes = new VueRouter({
                 {
                     path: '/',
                     component: SearchRestaurant
+                },
+                {
+                    path: '/add',
+                    component: AddRestaurant
                 }
             ]
         },
