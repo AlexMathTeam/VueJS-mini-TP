@@ -19,8 +19,8 @@
 
     <v-spacer></v-spacer>
 
-    <template v-for="page in pages">
-      <v-btn v-bind:key="page" elevation="0" @click="goTo(page.route)">
+    <template v-for="(page,index) in pages">
+      <v-btn v-bind:key="index" elevation="0" @click="goTo(page.route)">
         <v-icon>{{ page.icon }}</v-icon>
         <span>{{ page.name }}</span>
       </v-btn>

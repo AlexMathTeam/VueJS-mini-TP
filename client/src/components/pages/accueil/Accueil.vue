@@ -17,8 +17,8 @@
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
-        v-for="restaurant in random"
-        v-bind:key="restaurant"
+        v-for="(restaurant, index) in random"
+        v-bind:key="index"
         :restaurant="restaurant"
       ></Recommandation>
     </div>
@@ -26,8 +26,8 @@
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
-        v-for="restaurant in random"
-        v-bind:key="restaurant"
+        v-for="(restaurant, index) in random"
+        v-bind:key="index"
         :restaurant="restaurant"
       ></Recommandation>
     </div>
