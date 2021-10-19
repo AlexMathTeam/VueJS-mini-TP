@@ -1,7 +1,7 @@
 <template>
   <div class="container-aff-restau">
       <div class="container-image">
-          <img :src="urlPicture" :alt="alt"/>
+          <!-- <img :src="urlPicture" :alt="alt"/> -->
       </div>
       <div class="container-infos">
 
@@ -49,9 +49,9 @@ export default {
 <style>
     .container-aff-restau {
         position: relative;
-        width: 200px;
-        height: 200px;
-        border-radius: 15px;
+        width: 125px;
+        height: 125px;
+        border-radius: 5px;
         overflow: hidden;
         z-index: 0;
     }
