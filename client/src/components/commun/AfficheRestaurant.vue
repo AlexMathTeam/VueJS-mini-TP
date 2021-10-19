@@ -49,8 +49,8 @@ export default {
 <style>
     .container-aff-restau {
         position: relative;
-        width: 125px;
-        height: 125px;
+        width: 175px;
+        height: 150px;
         border-radius: 5px;
         overflow: hidden;
         z-index: 0;
