@@ -17,10 +17,10 @@ export default {
     name: 'AfficheRestaurant',
     props: {
         restaurant: Restaurant,
-        img: {
+        /* img: {
             url: String,
             alt: String
-        }
+        } */
     },
     computed: {
         id() {
