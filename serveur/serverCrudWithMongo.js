@@ -85,7 +85,22 @@ app.get('/api/restaurants/count', function(req, res) {
     // Pour le moment on simule, mais après on devra
     // réellement se connecte à la base de données
     // et renvoyer une valeur pour dire si tout est ok
-    let name = req.query.name || '';
+    let name = req.query.cuisine || '';
+
+    mongoDBModule.countRestaurants(name, function(data) {
+        var objdData = {
+            msg:"restaurants count",
+            data: data
+        }
+        res.send(JSON.stringify(objdData));
+    });
+});
+
+app.get('/api/restaurants/countfrench', function(req, res) {
+    // Pour le moment on simule, mais après on devra
+    // réellement se connecte à la base de données
+    // et renvoyer une valeur pour dire si tout est ok
+    let name = req.query.cuisine = 'French';
 
     mongoDBModule.countRestaurants(name, function(data) {
         var objdData = {
@@ -108,10 +123,24 @@ app.get('/api/restaurants', function(req, res) {
     // idem si present on prend la valeur, sinon 10
     let pagesize = parseInt(req.query.pagesize || 10);
 
-    let name = req.query.name || '';
+    let query = '';
+	let filtre = 'name';
+
+	if(req.query.name){
+		query = req.query.name
+		filtre = 'name';
+	}
+	else if(req.query.cuisine){
+		query = req.query.cuisine
+		filtre = 'cuisine';
+	}
+	else if(req.query.borough){
+		query = req.query.borough
+		filtre = 'borough';
+	}
 
 
- 	mongoDBModule.findRestaurants(page, pagesize, name, function(data,count) {
+ 	mongoDBModule.findRestaurants(page, pagesize, query,filtre, function(data,count) {
  		var objdData = {
  			msg:"restaurant recherchés avec succès",
  			data: data,

@@ -23,10 +23,17 @@ export function post(path, params) {
     const appendForm = ([key, value]) => formParams.append(key, value);
     
     if (params instanceof FormData) {
-        params.entries().foreach(appendForm);
+        for (const [key, value] of params.entries()) {
+            formParams.append(key, value);
+          }
     }
     else {
         Object.entries(params).forEach(appendForm)
+    }
+
+    console.log('TEST TEST');
+    for (const [key, value] of formParams.entries()) {
+        console.log(`${key}: ${value}`);
     }
 
     return fetch(`${url}/${path}`, {

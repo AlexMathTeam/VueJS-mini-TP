@@ -22,11 +22,11 @@
         :restaurant="restaurant"
       ></Recommandation>
     </div>
-    <span class="span-accueil">Restaurant de la semaine</span>
+    <span class="span-accueil">Les restaurants français !</span>
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
-        v-for="(restaurant, index) in random"
+        v-for="(restaurant, index) in listeFrance"
         v-bind:key="index"
         :restaurant="restaurant"
       ></Recommandation>
@@ -38,7 +38,7 @@
 <script>
 import Filtres from "../../../modules/Filtres";
 import Recommandation from "./Recommandation";
-import { getRestaurants, getRestaurantsCount } from "../../../modules/api/RestaurantsAPI";
+import { getRestaurants, getRestaurantsCount, getRestaurantsCountFrench} from "../../../modules/api/RestaurantsAPI";
 export default {
   components: { Recommandation },
   name: "Accueil",
@@ -46,6 +46,7 @@ export default {
   data: () => ({
     n: 1,
     random: [],
+    listeFrance: [],
   }),
   mounted() {
     getRestaurantsCount().then(res => {
@@ -54,6 +55,12 @@ export default {
       getRestaurants({page: random, pagesize: 4}).then(res => this.random = res.restaurants);
     })
 
+    getRestaurantsCountFrench().then(res => {
+      const pageMax = Math.ceil(res/4);
+      const random = Math.floor(Math.random() * pageMax);
+      getRestaurants({page: random, pagesize: 4,cuisine: 'French'}).then (res => this.listeFrance = res.restaurants);
+
+    })
     
   },
   created() {

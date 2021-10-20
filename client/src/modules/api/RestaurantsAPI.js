@@ -11,3 +11,7 @@ export function getRestaurants(params) {
 export function getRestaurantsCount() {
     return get('restaurants/count').then(res => res.data ?? 0);
 }
+
+export function getRestaurantsCountFrench() {
+    return get('restaurants/countfrench').then(res => res.data ?? 0);
+}

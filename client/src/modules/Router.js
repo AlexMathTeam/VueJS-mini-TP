@@ -17,13 +17,14 @@ const routes = new VueRouter({
             component: GestionRestaurants,
             children: [
                 {
-                    path: '/',
+                    path: '',
                     component: SearchRestaurant
                 },
                 {
-                    path: '/add',
+                    path: 'add',
                     component: AddRestaurant
-                }
+                },
+                
             ]
         },
         {
