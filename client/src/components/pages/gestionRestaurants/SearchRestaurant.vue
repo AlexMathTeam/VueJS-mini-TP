@@ -1,23 +1,26 @@
 <template>
   <section class="container-search-restaurants">
-    <header>
-      <v-text-field
-        v-model="motsCle"
-        clearable
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Rechercher des restaurants "
-        @change="debounceSearch()"
-      ></v-text-field>
-    </header>
+    <header></header>
     <main>
-      <AfficheRestaurant
-        v-for="restaurant in restaurants"
-        :key="restaurant"
-        :restaurant="restaurant"
-      ></AfficheRestaurant>
+      <div class="options">
+        <v-text-field
+          v-model="motsCle"
+          clearable
+          flat
+          solo-inverted
+          hide-details
+          prepend-inner-icon="mdi-magnify"
+          label="Rechercher des restaurants "
+          @change="debounceSearch()"
+        ></v-text-field>
+      </div>
+      <div class="restaurants">
+        <AfficheRestaurant
+          v-for="restaurant in restaurants"
+          :key="restaurant"
+          :restaurant="restaurant"
+        ></AfficheRestaurant>
+      </div>
     </main>
   </section>
 </template>
@@ -26,7 +29,7 @@
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
-import lodash from 'lodash';
+import _ from "lodash";
 
 export default {
   name: "",
@@ -35,10 +38,10 @@ export default {
   },
   data: () => ({
     page: 0,
-    nbParPage: 10,
+    nbParPage: 20,
     name: "",
     restaurants: [],
-    motsCle = '',
+    motsCle: "",
   }),
   mounted() {
     this.searchRestaurants();
@@ -48,16 +51,15 @@ export default {
       getRestaurants({
         page: this.page,
         pagesize: this.nbParPage,
-        name: this.name,
+        name: this.motsCle,
       })
         .then((res) => (this.restaurants = res.restaurants))
         .catch((err) => {
           console.log(err);
         });
     },
-    debounceSearch: lodash.debounce(() => {
-      this.page = 0,
-      this.searchRestaurants();
+    debounceSearch: _.debounce(function () {
+      (this.page = 0), this.searchRestaurants();
     }, 300),
   },
 };
@@ -74,12 +76,29 @@ export default {
   width: 100%;
 }
 
-.container-search-restaurants main {
+.container-search-restaurants > main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: hidden;
+}
+
+.container-search-restaurants > main > .options {
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+  height: 100%;
+}
+
+.container-search-restaurants > main > .restaurants {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+  width: 80%;
+  height: 100%;
 }
 </style>
