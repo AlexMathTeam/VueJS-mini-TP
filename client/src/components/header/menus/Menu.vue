@@ -49,6 +49,7 @@ export default {
         icon: "mdi-map-marker",
       },
     ],
+    search: "",
   }),
   methods: {
     goTo(route) {
