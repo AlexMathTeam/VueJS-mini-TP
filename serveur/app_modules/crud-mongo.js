@@ -68,6 +68,7 @@ exports.findRestaurants = async (page, pagesize, name, filtre) => {
 			if (filtre == "name") {
 				query.name = { $regex: ".*" + name + ".*", $options: "i" };
 			}
+
 			if (filtre == "cuisine") {
 				query.cuisine = { $regex: ".*" + name + ".*", $options: "i" };
 			}
