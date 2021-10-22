@@ -11,7 +11,7 @@
           hide-details
           prepend-inner-icon="mdi-magnify"
           label="Rechercher des restaurants "
-          @change="debounceSearch()"
+          @input="debounceSearch()"
         ></v-text-field>
       </div>
       <div class="restaurants">
@@ -51,7 +51,7 @@ export default {
       getRestaurants({
         page: this.page,
         pagesize: this.nbParPage,
-        name: this.motsCle,
+        name: this.motsCle ?? '',
       })
         .then((res) => (this.restaurants = res.restaurants))
         .catch((err) => {
