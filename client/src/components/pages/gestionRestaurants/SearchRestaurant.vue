@@ -1,26 +1,33 @@
 <template>
   <section class="container-search-restaurants">
-    <header></header>
+    <header>
+      <v-text-field
+        v-model="motsCle"
+        clearable
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="Rechercher des restaurants "
+        @input="debounceSearch()"
+      ></v-text-field>
+    </header>
     <main>
-      <div class="options">
-        <v-text-field
-          v-model="motsCle"
-          clearable
-          flat
-          solo-inverted
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          label="Rechercher des restaurants "
-          @input="debounceSearch()"
-        ></v-text-field>
-      </div>
-      <div class="restaurants">
-        <AfficheRestaurant
-          v-for="restaurant in restaurants"
-          :key="restaurant"
-          :restaurant="restaurant"
-        ></AfficheRestaurant>
-      </div>
+      <template v-if="!load">
+        <div class="restaurants" v-if="msg === undefined">
+          <AfficheRestaurant
+            v-for="(restaurant, index) in restaurants"
+            :key="index"
+            :restaurant="restaurant"
+          ></AfficheRestaurant>
+        </div>
+        <div class="msg" v-else>
+
+        </div>
+      </template>
+      <template v-else>
+
+      </template>
     </main>
   </section>
 </template>
@@ -41,22 +48,36 @@ export default {
     nbParPage: 20,
     name: "",
     restaurants: [],
+    count: 0,
     motsCle: "",
+    load: false,
+    msg: undefined,
   }),
   mounted() {
     this.searchRestaurants();
   },
   methods: {
-    searchRestaurants() {
-      getRestaurants({
-        page: this.page,
-        pagesize: this.nbParPage,
-        name: this.motsCle ?? '',
-      })
-        .then((res) => (this.restaurants = res.restaurants))
-        .catch((err) => {
-          console.log(err);
+    async searchRestaurants() {
+      try {
+        this.load = true;
+        const res = await getRestaurants({
+          page: this.page,
+          pagesize: this.nbParPage,
+          name: this.motsCle ?? "",
         });
+        this.restaurants = res.restaurants;
+        this.count = res.count;
+        if (this.restaurants.length < 0) {
+          this.msg = "Aucun restaurant trouvé";
+        } else {
+          this.msg = undefined;
+        }
+      } catch (exception) {
+        this.restaurants = [];
+        this.msg = "Une erreur est survenue";
+      } finally {
+        this.load = false;
+      }
     },
     debounceSearch: _.debounce(function () {
       (this.page = 0), this.searchRestaurants();
@@ -84,13 +105,6 @@ export default {
   height: 100%;
   max-height: 100%;
   overflow-y: hidden;
-}
-
-.container-search-restaurants > main > .options {
-  display: flex;
-  justify-content: flex-start;
-  width: 20%;
-  height: 100%;
 }
 
 .container-search-restaurants > main > .restaurants {

@@ -1,27 +1,47 @@
 <template>
-    <div class="container-restaurant-detail">
-
-    </div>
+  <div class="container-restaurant-detail">
+      <div v-if="restaurant !== undefined">{{ name }}</div>
+  </div>
 </template>
 
 <script>
-import Restaurant from '../../../modules/modeles/Restaurant';
+import { getRestaurantById } from "../../../modules/api/RestaurantsAPI";
+import ObjIsNull from '../../../modules/ObjIsNull';
 
 export default {
-    name: 'Restaurant',
-    props: {
-        restaurant: Restaurant,
+  name: "Restaurant",
+  data: () => ({
+    id: "",
+    restaurant: undefined,
+    load: false,
+    msg: undefined,
+  }),
+  mounted() {
+    this.id = this.$route.params.id;
+    this.getRestaurant();
+  },
+  computed: {
+    name() { return this.restaurant.name ?? ""; },
+    cuisine() { return this.restaurant.cuisine ?? ""; },
+  },
+  methods: {
+    async getRestaurant() {
+      try {
+        this.load = true;
+        this.restaurant = await getRestaurantById(this.id);
+        this.msg = ObjIsNull(this.restaurant) ? "Le restaurant que vous cherchez n'existe pas" : undefined;
+      } catch (exception) {
+        this.msg = "Une erreur est sur venue";
+      } finally {
+          this.load = false;
+      }
     },
-    computed: {
-        id: () => this.restaurant.id,
-        name: () => this.restaurant.name,
-        cuisine: () => this.restaurant.cuisine,
-    }
-}
+  },
+};
 </script>
 
 <style>
-    .container-restaurants-detail {
-        display: flex;
-    }
+.container-restaurants-detail {
+  display: flex;
+}
 </style>

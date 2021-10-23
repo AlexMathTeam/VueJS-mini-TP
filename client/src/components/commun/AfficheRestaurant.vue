@@ -1,6 +1,6 @@
 <template>
   <div class="affichage-restaurant">
-    <div class="container-aff-restau" @click="goRoDetails()">
+    <div class="container-aff-restau" @click="goToDetails()">
       <div class="container-image"></div>
       <div class="container-infos">
         <div class="header">{{ name }}</div>
@@ -44,7 +44,7 @@ export default {
   methods: {
     goToDetails() {
       if (this.restaurant) {
-        this.$router.push({ name: "restaurant", params: { id: this.id } });
+        this.$router.push({ path: `/restaurant/${this.id}`});
       }
     },
   },
