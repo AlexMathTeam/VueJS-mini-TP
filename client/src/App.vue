@@ -31,6 +31,7 @@ export default {
 
 main.app {
   margin-top: 100px;
+  height: calc(100vh - 100px);
 }
 
 </style>

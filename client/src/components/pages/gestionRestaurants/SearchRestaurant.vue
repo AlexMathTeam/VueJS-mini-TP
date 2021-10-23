@@ -1,18 +1,38 @@
 <template>
   <section class="container-search-restaurants">
     <header>
-      <v-text-field
-        v-model="motsCle"
-        clearable
-        flat
-        solo-inverted
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        label="Rechercher des restaurants "
-        @input="debounceSearch()"
-      ></v-text-field>
+      <div class="container-search-bar">
+        <v-text-field
+          v-model="motsCle"
+          clearable
+          flat
+          solo-inverted
+          hide-details
+          prepend-inner-icon="mdi-magnify"
+          label="Rechercher des restaurants "
+          @input="debounceReset()"
+        ></v-text-field>
+      </div>
+      <div class="pagination">
+        <div class="number-page">
+          <v-pagination
+            v-model="page"
+            :length="paginationLength"
+            :total-visible="6"
+            @input="paginationChange()"
+          ></v-pagination>
+        </div>
+        <div class="nb-el-page">
+          <v-select
+            v-model="nbParPage"
+            v-on:change="searchRestaurants"
+            :items="itemsNbParPage"
+            @input="paginationChange()"
+          ></v-select>
+        </div>
+      </div>
     </header>
-    <main>
+    <main v-bind:class="{ loader: load }">
       <template v-if="!load">
         <div class="restaurants" v-if="msg === undefined">
           <AfficheRestaurant
@@ -21,12 +41,16 @@
             :restaurant="restaurant"
           ></AfficheRestaurant>
         </div>
-        <div class="msg" v-else>
-
-        </div>
+        <div class="msg" v-else></div>
       </template>
       <template v-else>
-
+        <div class="container-spinner">
+          <v-progress-circular
+            indeterminate
+            color="green"
+            :size="100"
+          ></v-progress-circular>
+        </div>
       </template>
     </main>
   </section>
@@ -34,6 +58,7 @@
 
 <script>
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
+import { timeout } from "../../../modules/api/Utils";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
 import _ from "lodash";
@@ -44,8 +69,11 @@ export default {
     AfficheRestaurant,
   },
   data: () => ({
-    page: 0,
+    page: 1,
     nbParPage: 20,
+    itemsNbParPage: Array(4)
+      .fill(0)
+      .map((x, index) => 5 * (index + 1)),
     name: "",
     restaurants: [],
     count: 0,
@@ -53,6 +81,11 @@ export default {
     load: false,
     msg: undefined,
   }),
+  computed: {
+    paginationLength() {
+      return Math.ceil(this.count / this.nbParPage);
+    },
+  },
   mounted() {
     this.searchRestaurants();
   },
@@ -60,8 +93,10 @@ export default {
     async searchRestaurants() {
       try {
         this.load = true;
+        const page = this.page - 1;
+        await timeout(1000);
         const res = await getRestaurants({
-          page: this.page,
+          page: page >= 0 ? page : 0,
           pagesize: this.nbParPage,
           name: this.motsCle ?? "",
         });
@@ -79,9 +114,20 @@ export default {
         this.load = false;
       }
     },
+    reset() {
+      this.page = 1;
+      this.searchRestaurants();
+    },
     debounceSearch: _.debounce(function () {
-      (this.page = 0), this.searchRestaurants();
+      this.searchRestaurants();
     }, 300),
+    debounceReset: _.debounce(function () {
+      this.reset();
+    }, 300),
+    paginationChange() {
+      this.load = true;
+      this.debounceSearch();
+    },
   },
 };
 </script>
@@ -91,10 +137,23 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 }
 
 .container-search-restaurants header {
+  display: flex;
+  flex-direction: row;
   width: 100%;
+}
+
+.container-search-restaurants header > .container-search-bar {
+  width: 25%;
+}
+
+.container-search-restaurants header > .pagination {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
 }
 
 .container-search-restaurants > main {
@@ -104,7 +163,10 @@ export default {
   width: 100%;
   height: 100%;
   max-height: 100%;
-  overflow-y: hidden;
+}
+
+.container-search-restaurants > main.loader {
+  align-items: flex-start;
 }
 
 .container-search-restaurants > main > .restaurants {
@@ -112,7 +174,16 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  width: 80%;
+  justify-content: center;
+  width: 100%;
   height: 100%;
+}
+
+.container-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
 }
 </style>
