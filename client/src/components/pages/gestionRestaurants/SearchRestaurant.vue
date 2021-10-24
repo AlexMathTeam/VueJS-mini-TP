@@ -33,25 +33,21 @@
       </div>
     </header>
     <main v-bind:class="{ loader: load }">
-      <template v-if="!load">
-        <div class="restaurants" v-if="msg === undefined">
-          <AfficheRestaurant
-            v-for="(restaurant, index) in restaurants"
-            :key="index"
-            :restaurant="restaurant"
-          ></AfficheRestaurant>
-        </div>
-        <div class="msg" v-else></div>
-      </template>
-      <template v-else>
-        <div class="container-spinner">
-          <v-progress-circular
-            indeterminate
-            color="green"
-            :size="100"
-          ></v-progress-circular>
-        </div>
-      </template>
+      <div class="restaurants" v-if="!load && msg === undefined">
+        <AfficheRestaurant
+          v-for="(restaurant, index) in restaurants"
+          :key="index"
+          :restaurant="restaurant"
+        ></AfficheRestaurant>
+      </div>
+      <div class="container-spinner" v-else-if="load">
+        <v-progress-circular
+          indeterminate
+          color="green"
+          :size="100"
+        ></v-progress-circular>
+      </div>
+      <div class="msg" v-else></div>
     </main>
   </section>
 </template>
@@ -94,6 +90,7 @@ export default {
       try {
         this.load = true;
         const page = this.page - 1;
+        this.msg = undefined;
         await timeout(1000);
         const res = await getRestaurants({
           page: page >= 0 ? page : 0,
@@ -104,8 +101,6 @@ export default {
         this.count = res.count;
         if (this.restaurants.length < 0) {
           this.msg = "Aucun restaurant trouvé";
-        } else {
-          this.msg = undefined;
         }
       } catch (exception) {
         this.restaurants = [];

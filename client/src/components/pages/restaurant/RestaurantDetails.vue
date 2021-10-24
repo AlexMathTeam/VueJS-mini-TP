@@ -1,12 +1,24 @@
 <template>
   <div class="container-restaurant-detail">
-      <div v-if="restaurant !== undefined">{{ name }}</div>
+    <article class="container-restaurant" v-if="restaurant !== undefined">
+      <header></header>
+      <main></main>
+    </article>
+    <div class="container-loader" v-else-if="load">
+      <div class="container-spinner">
+        <v-progress-circular
+          indeterminate
+          color="green"
+          :size="100"
+        ></v-progress-circular>
+      </div>
+    </div>
+    <div class="container-msg-error" v-else></div>
   </div>
 </template>
 
 <script>
 import { getRestaurantById } from "../../../modules/api/RestaurantsAPI";
-import ObjIsNull from '../../../modules/ObjIsNull';
 
 export default {
   name: "Restaurant",
@@ -14,26 +26,22 @@ export default {
     id: "",
     restaurant: undefined,
     load: false,
-    msg: undefined,
+    error: false,
   }),
   mounted() {
     this.id = this.$route.params.id;
-    this.getRestaurant();
-  },
-  computed: {
-    name() { return this.restaurant.name ?? ""; },
-    cuisine() { return this.restaurant.cuisine ?? ""; },
+    this.searchRestaurant();
   },
   methods: {
-    async getRestaurant() {
+    async searchRestaurant() {
       try {
         this.load = true;
+        this.error = false;
         this.restaurant = await getRestaurantById(this.id);
-        this.msg = ObjIsNull(this.restaurant) ? "Le restaurant que vous cherchez n'existe pas" : undefined;
       } catch (exception) {
-        this.msg = "Une erreur est sur venue";
+        this.error = true;
       } finally {
-          this.load = false;
+        this.load = false;
       }
     },
   },

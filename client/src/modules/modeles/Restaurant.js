@@ -7,14 +7,16 @@ export default class Restaurant {
     #id;
     #name;
     #cuisine;
+    #arrondissement;
     #grades;
     #adresse;
     #restaurant_id;
 
-    constructor(id, name, cuisine, grades, adresse, restaurant_id) {
+    constructor(id, name, cuisine, arrondissement, grades, adresse, restaurant_id) {
         this.#id = id;
         this.#name = name;
         this.#cuisine = cuisine;
+        this.#arrondissement = arrondissement;
         this.#grades = grades;
         this.#adresse = adresse;
         this.#restaurant_id = restaurant_id;
@@ -30,6 +32,10 @@ export default class Restaurant {
 
     get cuisine() {
         return this.#cuisine;
+    }
+
+    get arrondissement() {
+        return this.#arrondissement;
     }
 
     get grades() {
@@ -50,7 +56,8 @@ export default class Restaurant {
                 obj.id ?? obj._id,
                 obj.name,
                 obj.cuisine,
-                Grade.convertToGrade(obj.grades),
+                obj.borough,
+                Grade.convertsToGrade(obj.grades),
                 Adresse.convertToAdresse(obj.address),
                 obj.restaurant_id
             );
