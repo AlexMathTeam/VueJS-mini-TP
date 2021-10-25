@@ -2,7 +2,9 @@
   <div class="container-restaurant-detail">
     <article class="container-restaurant" v-if="restaurant !== undefined">
       <header></header>
-      <main></main>
+      <main>
+        <p>Nom: {{ restaurant.name }}</p>
+      </main>
     </article>
     <div class="container-loader" v-else-if="load">
       <div class="container-spinner">
