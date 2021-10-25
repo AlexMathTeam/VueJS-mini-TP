@@ -2,10 +2,9 @@ import ObjIsNull from "../ObjIsNull";
 
 const url = 'http://localhost:8080/api';
 
-export function get(path, params) {
+export async function get(path, params) {
     const link = `${url}/${path}`;
     let strParams = '';
-
     if (!ObjIsNull(params) && !paramsEmpty(params)) {
         const paramsEntries = Object.entries(params);
         strParams = strParams.concat('?').concat(
@@ -14,32 +13,22 @@ export function get(path, params) {
             }).join('&'))
         );
     }
-
-    return fetch(link + strParams).then(reponseJSON => reponseJSON.json());
+    return (await fetch(link + strParams)).json();
 }
 
-export function post(path, params) {
-    const formParams = new FormData();
-    const appendForm = ([key, value]) => formParams.append(key, value);
-    
+export async function post(path, params) {
+    let formParams;
     if (params instanceof FormData) {
-        for (const [key, value] of params.entries()) {
-            formParams.append(key, value);
-          }
+        formParams = params;
     }
     else {
-        Object.entries(params).forEach(appendForm)
+        formParams = new FormData();
+        Object.entries(params).forEach(([key, value]) => formParams.append(key, value))
     }
-
-    console.log('TEST TEST');
-    for (const [key, value] of formParams.entries()) {
-        console.log(`${key}: ${value}`);
-    }
-
-    return fetch(`${url}/${path}`, {
+    return (await fetch(`${url}/${path}`, {
         method: 'POST',
         body: formParams,
-    }).then(reponseJSON => reponseJSON.json());
+    })).json();
 }
 
 function paramsEmpty(obj) {

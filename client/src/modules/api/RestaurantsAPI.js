@@ -1,17 +1,19 @@
 import Restaurant from '../modeles/Restaurant';
 import { get } from './API';
 
-export function getRestaurants(params) {
-    return get('restaurants', params).then(res => ({
-        count: res.count,
-        restaurants: Restaurant.convertsToRestaurant(res.data ?? [])
-    }));
+export async function getRestaurants(params) {
+    const res = await get('restaurants', params);
+    return { count: res.count, restaurants: Restaurant.convertsToRestaurant(res.data ?? []) };
 }
 
-export function getRestaurantsCount() {
-    return get('restaurants/count').then(res => res.data ?? 0);
+export async function getRestaurantsCount() {
+    return (await get('restaurants/count')).data;
 }
 
-export function getRestaurantsCountFrench() {
-    return get('restaurants/countfrench').then(res => res.data ?? 0);
+export async function getRestaurantsCountFrench() {
+    return (await get('restaurants/countfrench')).data;
+}
+
+export async function getRestaurantById(id) {
+    return Restaurant.convertToRestaurant((await get(`restaurants/${id}`)).restaurant);
 }

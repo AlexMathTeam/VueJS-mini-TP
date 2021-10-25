@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu></Menu>
-    <main>
+    <main class="app">
       <router-view></router-view>
     </main>
   </div>
@@ -28,8 +28,10 @@ export default {
   color: #2c3e50;
   
 }
-main{
+
+main.app {
   margin-top: 100px;
+  height: calc(100vh - 100px);
 }
 
 </style>
