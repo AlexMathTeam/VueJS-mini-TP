@@ -1,9 +1,16 @@
 import Vue from 'vue';
 import App from './App.vue';
+
+//Extentions VueJS
 import VueRouter from "vue-router";
+import store from './store'
+
+//Packages
+//->Vuetify
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
-import store from './store'
+//->Leaflet
+import 'leaflet/dist/leaflet.css';
 
 //Modules
 import router from './modules/Router';

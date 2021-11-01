@@ -1,22 +1,39 @@
 <template>
   <div id="app">
     <Menu></Menu>
-    <main class="app">
+    <main class="app" :style="{ marginTop }">
       <router-view></router-view>
     </main>
   </div>
 </template>
 
 <script>
-import Menu from './components/header/menus/Menu.vue';
+import Menu from "./components/header/menus/Menu.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Menu,
   },
-}
-
+  watch: {
+    $route(to) {
+      this.marginTop=this.updateMarginTop(to.path);
+    },
+  },
+  data(){
+    return {
+      marginTop: this.updateMarginTop(this.$route.path)
+    }
+  },
+  methods: {
+    updateMarginTop(path){
+      switch (path){
+        case '/': return '120px';
+        default: return '64px';
+      }
+    }
+  },
+};
 </script>
 
 <style>
@@ -26,12 +43,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  
 }
 
 main.app {
-  margin-top: 100px;
   height: calc(100vh - 100px);
 }
-
 </style>

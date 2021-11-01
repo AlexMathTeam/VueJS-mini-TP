@@ -118,4 +118,5 @@ export default {
   width: 90%;
   height: max-content;
 }
+
 </style>
