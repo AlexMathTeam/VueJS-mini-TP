@@ -39,7 +39,7 @@ export default {
   methods: {
     goToDetails() {
       if (this.restaurant) {
-        this.$router.push({ path: `/restaurant/${this.id}` });
+        this.$router.push({ path: `/restaurant/${this.restaurant.id}` });
       }
     },
   },
