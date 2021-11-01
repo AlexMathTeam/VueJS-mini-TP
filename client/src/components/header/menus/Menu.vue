@@ -58,7 +58,7 @@ export default {
   },
   props: {
     serchIsPresent: Boolean,
-  }
+  },
 };
 </script>
 
