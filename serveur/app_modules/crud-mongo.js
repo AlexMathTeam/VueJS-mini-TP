@@ -142,8 +142,7 @@ exports.createRestaurant = async (formData) => {
 		const address = JSON.parse(formData.address);
 		const q = `${address.building}, ${address.street}, ${address.zipcode}`;
 		const emplacement  = (await geocoder.search({q}))[0];
-		console.log(emplacement);
-		if(emplacement !== undefined) address.coord = [Number(emplacement.lat), Number(emplacement.lon)];
+		if(emplacement !== undefined) address.coord = [Number(emplacement.lon), Number(emplacement.lat)];
 		let toInsert = {
 			name: formData.nom,
 			cuisine: formData.cuisine,
