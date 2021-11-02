@@ -27,6 +27,9 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    console.log(this.restaurant.id);
+  },
   computed: {
     grade() {
       const { grades } = this.restaurant;
@@ -39,7 +42,7 @@ export default {
   methods: {
     goToDetails() {
       if (this.restaurant) {
-        this.$router.push({ path: `/restaurant/${this.id}` });
+        this.$router.push({ path: `/restaurant/${this.restaurant.id}` });
       }
     },
   },
