@@ -44,7 +44,6 @@
             <v-btn class="mr-4" @click="validate" :disabled="!valid">
               Validate
             </v-btn>
-            <v-btn color="accent" large @click.stop="modelPopUp = true"></v-btn>
             <v-btn class="mr-4" @click="clear"> Effacer </v-btn>
           </v-container>
         </v-form>

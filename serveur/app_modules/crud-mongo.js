@@ -154,7 +154,7 @@ exports.createRestaurant = async (formData) => {
 		reponse = {
 			succes: true,
 			result: toInsert._id,
-			msg: "Ajout réussi " + toInsert._id + " "+ q,
+			msg: "Ajout réussi " + toInsert._id ,
 		};
 	} catch (err) {
 		reponse = {
