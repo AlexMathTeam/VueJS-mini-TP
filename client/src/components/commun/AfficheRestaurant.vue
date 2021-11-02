@@ -27,13 +27,9 @@ export default {
       required: true,
     },
   },
-  mounted() {
-    console.log(this.restaurant.id);
-  },
   computed: {
     grade() {
       const { grades } = this.restaurant;
-      console.log(grades);
       if (grades.length < 1) return '...';
       const moyen = grades.reduce((gradeA, gradeB) => gradeA.score ?? 0 + gradeB.score ?? 0)/grades.length;
       return Number(moyen).toFixed(2);

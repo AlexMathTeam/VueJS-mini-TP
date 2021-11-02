@@ -14,12 +14,13 @@
       hide-details
       prepend-inner-icon="mdi-magnify"
       label="Rechercher des restaurants "
-      v-if="$store.state.hideMenuSearch"
+      v-if="$store.state.printMenuSearch"
+      @input="debounceGoToRestaurants()"
     ></v-text-field>
 
     <v-spacer></v-spacer>
 
-    <template v-for="(page,index) in pages">
+    <template v-for="(page, index) in pages">
       <v-btn v-bind:key="index" elevation="0" @click="goTo(page.route)">
         <v-icon>{{ page.icon }}</v-icon>
         <span>{{ page.name }}</span>
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   name: "Menu",
   data: () => ({
@@ -55,6 +58,10 @@ export default {
     goTo(route) {
       this.$router.push(route);
     },
+    debounceGoToRestaurants: _.debounce(function () {
+      this.$store.state.motsclesRestaurants = this.search;
+      this.goTo("/restaurants");
+    }, 300),
   },
   props: {
     serchIsPresent: Boolean,
@@ -79,7 +86,7 @@ export default {
   transition: none;
 }
 
-header{
+header.menuPrincipal {
   z-index: 100000;
 }
 </style>

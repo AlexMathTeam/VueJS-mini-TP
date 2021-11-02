@@ -1,6 +1,6 @@
 <template>
   <section class="container-search-restaurants">
-    <header v-if="!load && msg === undefined">
+    <header>
       <v-text-field
         v-model="motsCle"
         clearable
@@ -9,6 +9,7 @@
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Rechercher des restaurants "
+        style="max-width: 330px"
         @input="debounceReset()"
       ></v-text-field>
       <v-pagination
@@ -17,6 +18,7 @@
         :total-visible="6"
         color="green darken-2"
         @input="paginationChange()"
+        v-if="!load && msg === undefined"
       ></v-pagination>
       <v-select
         v-model="nbParPage"
@@ -24,6 +26,7 @@
         :items="itemsNbParPage"
         solo
         @input="paginationChange()"
+        v-if="!load && msg === undefined"
       ></v-select>
     </header>
     <main v-bind:class="{ loader: load }">
@@ -75,7 +78,11 @@ export default {
     },
   },
   mounted() {
+    window.scroll(0, 0);
+    this.$store.state.printMenuSearch = false;
+    this.motsCle = this.$store.state.motsclesRestaurants;
     this.searchRestaurants();
+    this.$store.state.motsclesRestaurants = "";
   },
   methods: {
     async searchRestaurants() {
@@ -154,6 +161,8 @@ export default {
 
 .container-search-restaurants > main.loader {
   align-items: flex-start;
+  min-height: 200px;
+  height: 50%;
 }
 
 .container-search-restaurants > main > .restaurants {

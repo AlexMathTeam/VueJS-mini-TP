@@ -63,7 +63,6 @@ export default {
   },
   computed: {
     headerBackground() {
-      console.log(this.image);
       return !ObjIsNull(this.image)
         ? {
             backgroundImage: `url("${this.image}")`,
