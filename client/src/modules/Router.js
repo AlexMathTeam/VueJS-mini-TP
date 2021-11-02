@@ -3,8 +3,7 @@ import GestionRestaurants from '../components/pages/gestionRestaurants/GestionRe
 import FindRestaurants from '../components/pages/findRestaurants/FindRestaurants';
 import RestaurantDetails from '../components/pages/restaurant/RestaurantDetails'
 import SearchRestaurant from '../components/pages/gestionRestaurants/SearchRestaurant';
-import AddRestaurant from '../components/pages/gestionRestaurants/AddRestaurant'
-import BarreMenu from '../components/pages/gestionRestaurants/BarreMenu'
+import AddRestaurant from '../components/pages/gestionRestaurants/AddRestaurant';
 import VueRouter from 'vue-router';
 
 const routes = new VueRouter({
@@ -12,10 +11,6 @@ const routes = new VueRouter({
         {
             path: '/',
             component: Accueil,
-        },
-        {
-            path: '/BarreMenu',
-            component: BarreMenu,
         },
         {
             path: '/restaurants',
@@ -26,7 +21,7 @@ const routes = new VueRouter({
                     component: SearchRestaurant
                 },
                 {
-                    path: 'add',
+                    path: 'ajouter',
                     component: AddRestaurant
                 },
                 

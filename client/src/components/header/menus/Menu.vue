@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dense>
+  <v-toolbar dense class="menuPrincipal">
     <v-avatar>
       <img src="../../../assets/logo.png" />
     </v-avatar>
@@ -67,7 +67,7 @@ export default {
   background-color: #fff !important;
 }
 
-.v-toolbar {
+.v-toolbar.menuPrincipal {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -76,6 +76,7 @@ export default {
   padding-bottom: 10px;
   padding-top: 5px;
   min-width: max-content;
+  transition: none;
 }
 
 header{

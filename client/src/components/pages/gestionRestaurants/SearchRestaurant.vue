@@ -1,36 +1,30 @@
 <template>
   <section class="container-search-restaurants">
-    <header>
-      <div class="container-search-bar">
-        <v-text-field
-          v-model="motsCle"
-          clearable
-          flat
-          solo-inverted
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          label="Rechercher des restaurants "
-          @input="debounceReset()"
-        ></v-text-field>
-      </div>
-      <div class="pagination">
-        <div class="number-page">
-          <v-pagination
-            v-model="page"
-            :length="paginationLength"
-            :total-visible="6"
-            @input="paginationChange()"
-          ></v-pagination>
-        </div>
-        <div class="nb-el-page">
-          <v-select
-            v-model="nbParPage"
-            v-on:change="searchRestaurants"
-            :items="itemsNbParPage"
-            @input="paginationChange()"
-          ></v-select>
-        </div>
-      </div>
+    <header v-if="!load && msg === undefined">
+      <v-text-field
+        v-model="motsCle"
+        clearable
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="Rechercher des restaurants "
+        @input="debounceReset()"
+      ></v-text-field>
+      <v-pagination
+        v-model="page"
+        :length="paginationLength"
+        :total-visible="6"
+        color="green darken-2"
+        @input="paginationChange()"
+      ></v-pagination>
+      <v-select
+        v-model="nbParPage"
+        v-on:change="searchRestaurants"
+        :items="itemsNbParPage"
+        solo
+        @input="paginationChange()"
+      ></v-select>
     </header>
     <main v-bind:class="{ loader: load }">
       <div class="restaurants" v-if="!load && msg === undefined">
@@ -60,16 +54,14 @@ import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 import _ from "lodash";
 
 export default {
-  name: "",
+  name: "SearchRestaurant",
   components: {
     AfficheRestaurant,
   },
   data: () => ({
     page: 1,
     nbParPage: 20,
-    itemsNbParPage: Array(4)
-      .fill(0)
-      .map((x, index) => 5 * (index + 1)),
+    itemsNbParPage: [5, 10, 15, 20, 30],
     name: "",
     restaurants: [],
     count: 0,
@@ -132,23 +124,25 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
 }
 
 .container-search-restaurants header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
+  padding: 15px;
 }
 
 .container-search-restaurants header > .container-search-bar {
-  width: 25%;
+  width: 35%;
 }
 
 .container-search-restaurants header > .pagination {
   display: flex;
   flex-direction: row;
-  width: 75%;
+  width: 65%;
+  justify-content: space-between;
 }
 
 .container-search-restaurants > main {
@@ -156,8 +150,6 @@ export default {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 100%;
-  max-height: 100%;
 }
 
 .container-search-restaurants > main.loader {

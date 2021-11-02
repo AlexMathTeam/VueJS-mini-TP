@@ -14,7 +14,7 @@
       v-bind:key="index"
       :lat-lng="restaurant.adresse.coord"
     >
-      <l-icon iconUrl="https://www.pikpng.com/pngl/m/36-369401_location-marker-icon-google-maps-pointer-elsavadorla-google.png"></l-icon>
+      <l-icon iconUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/752px-Map_pin_icon_green.svg.png"></l-icon>
       <l-tooltip> {{ restaurant.name | titlecase }} </l-tooltip>
     </l-marker>
   </l-map>

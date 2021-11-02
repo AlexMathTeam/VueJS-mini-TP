@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu></Menu>
-    <main class="app" :style="{ marginTop }">
+    <main class="app" :style="{ marginTop, height }">
       <router-view></router-view>
     </main>
   </div>
@@ -17,21 +17,28 @@ export default {
   },
   watch: {
     $route(to) {
-      this.marginTop=this.updateMarginTop(to.path);
+      this.marginTop = this.updateMarginTop(to.path);
     },
   },
-  data(){
+  data() {
     return {
-      marginTop: this.updateMarginTop(this.$route.path)
+      marginTop: this.updateMarginTop(this.$route.path),
+    };
+  },
+  computed: {
+    height() {
+      return `calc(100vw - ${this.marginTop})`;
     }
   },
   methods: {
-    updateMarginTop(path){
-      switch (path){
-        case '/': return '120px';
-        default: return '64px';
+    updateMarginTop(path) {
+      switch (path) {
+        case "/":
+          return "120px";
+        default:
+          return "64px";
       }
-    }
+    },
   },
 };
 </script>
