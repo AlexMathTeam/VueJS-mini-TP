@@ -1,6 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
+var Nominatim = require('nominatim-geocoder');
+const geocoder = new Nominatim();
 //var url = 'mongodb://localhost:27017/test';
 
 // Connection URL
@@ -136,23 +138,30 @@ exports.createRestaurant = async (formData) => {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });
 	let db = client.db(dbName);
 	let reponse;
-
 	try {
+		const address = JSON.parse(formData.address);
+		const q = `${address.building}, ${address.street}, ${address.zipcode}`;
+		const emplacement  = (await geocoder.search({q}))[0];
+		console.log(emplacement);
+		if(emplacement !== undefined) address.coord = [Number(emplacement.lat), Number(emplacement.lon)];
 		let toInsert = {
 			name: formData.nom,
-			cuisine: formData.cuisine
+			cuisine: formData.cuisine,
+			address,
+			borough: formData.borough,
+			grades:[],
 		};
 		let data = await db.collection("restaurants").insertOne(toInsert);
 		reponse = {
 			succes: true,
 			result: toInsert._id,
-			msg: "Ajout réussi " + toInsert._id
+			msg: "Ajout réussi " + toInsert._id + " "+ q,
 		};
 	} catch (err) {
 		reponse = {
 			succes: false,
 			error: err,
-			msg: "erreur lors du insert"
+			msg: "erreur lors de l'ajout "
 		};
 	} finally {
 		client.close();
