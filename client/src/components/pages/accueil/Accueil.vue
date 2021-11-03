@@ -91,7 +91,7 @@ export default {
     debounceGoToRestaurants: _.debounce(function () {
       this.$store.state.motsclesRestaurants = this.search;
       this.$router.push("/restaurants");
-    }, 300),
+    }, 500),
   },
 };
 </script>
