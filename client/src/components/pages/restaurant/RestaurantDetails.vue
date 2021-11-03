@@ -6,18 +6,15 @@
       </header>
       <main>
         <div class="data">
-
+          <p v-for="(value, libelle) in dataBody" v-bind:key="libelle" class="value"><span class="lib">{{ libelle | uppercase}}:</span> {{ value }}</p>
         </div>
-        <div class="adresse">
-          <div class="data-adresse"></div>
-          <div class="container-map-restaurant">
+        <div class="container-map-restaurant">
             <Map
-              :center="restaurant.adresse.coord"
-              :zoom="3"
+              :center="center"
+              :zoom="20"
               :restaurants="[restaurant]"
             ></Map>
           </div>
-        </div>
       </main>
     </article>
     <div class="container-loader" v-else-if="load">
@@ -70,8 +67,19 @@ export default {
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }
-        : { background: "green" };
+        : { background: "limegreen" };
     },
+    center() {
+      const { coord } = this.restaurant.adresse;
+      return [coord[1] ?? 0, coord[0] ?? 0];
+    },
+    dataBody() {
+      return {
+        cuisine: this.restaurant.cuisine,
+        adresse: `${this.restaurant.adresse.building}, ${this.restaurant.adresse.street}, ${this.restaurant.adresse.zipcode}`,
+        arrondissement: this.restaurant.arrondissement
+      }
+    }
   },
   methods: {
     async searchRestaurant() {
@@ -119,27 +127,30 @@ export default {
 
 .container-restaurant > main {
   display: flex;
-  flex-direction: column;
   width: 100%;
   height: 65%;
 }
 
 .data {
   display: flex;
-  height: 50%;
-  background: rgb(243, 243, 243);
-}
-
-.adresse {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 50%;
-}
-
-.data-adresse {
+  flex-direction: column;
+  text-align: left;
   width: 40%;
   height: 100%;
+  padding: 10px 20px;
+}
+
+.data > *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.data p {
+  font-size: 1em;
+}
+
+.data .lib {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .container-map-restaurant {

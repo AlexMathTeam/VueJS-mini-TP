@@ -12,7 +12,7 @@
     <l-marker
       v-for="(restaurant, index) in restaurants"
       v-bind:key="index"
-      :lat-lng="restaurant.adresse.coord"
+      :lat-lng="getCoord(restaurant)"
     >
       <l-icon iconUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/752px-Map_pin_icon_green.svg.png"></l-icon>
       <l-tooltip> {{ restaurant.name | titlecase }} </l-tooltip>
@@ -69,6 +69,10 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
     },
+    getCoord(restau) {
+      const { coord } = restau.adresse;
+      return [coord[1] ?? 0, coord[0] ?? 0];
+    }
   },
   filters: Filtres,
 };

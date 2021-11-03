@@ -44,7 +44,9 @@
           :size="100"
         ></v-progress-circular>
       </div>
-      <div class="msg" v-else></div>
+      <div class="msg" v-else>
+        {{ msg }}
+      </div>
     </main>
   </section>
 </template>
@@ -90,13 +92,13 @@ export default {
         this.load = true;
         const page = this.page - 1;
         this.msg = undefined;
-        await timeout(1000);
         const res = await getRestaurants({
           page: page >= 0 ? page : 0,
           pagesize: this.nbParPage,
           name: this.motsCle ?? "",
         });
         this.restaurants = res.restaurants;
+        await timeout(600);
         this.count = res.count;
         if (this.restaurants.length < 0) {
           this.msg = "Aucun restaurant trouvé";
