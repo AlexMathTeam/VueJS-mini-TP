@@ -55,4 +55,16 @@ export default {
 main.app {
   height: calc(100vh - 100px);
 }
+
+.v-select .v-menu {
+  display: block;
+}
+
+.theme--light.v-pagination .v-pagination__item--active {
+  background: limegreen !important;
+}
+
+.v-text-field__slot input {
+    color: red
+  }
 </style>
