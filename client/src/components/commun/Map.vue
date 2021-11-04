@@ -13,8 +13,9 @@
       v-for="(restaurant, index) in restaurants"
       v-bind:key="index"
       :lat-lng="getCoord(restaurant)"
+      @click="goToDetails(restaurant)"
     >
-      <l-icon iconUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/752px-Map_pin_icon_green.svg.png"></l-icon>
+      <l-icon iconUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Map_pin_icon_green.svg/752px-Map_pin_icon_green.svg.png" ></l-icon>
       <l-tooltip> {{ restaurant.name | titlecase }} </l-tooltip>
     </l-marker>
   </l-map>
@@ -72,7 +73,12 @@ export default {
     getCoord(restau) {
       const { coord } = restau.adresse;
       return [coord[1] ?? 0, coord[0] ?? 0];
-    }
+    },
+     goToDetails(restaurant) {
+      if (restaurant) {
+        this.$router.push({ path: `/restaurant/${restaurant.id}` });
+      }
+    },
   },
   filters: Filtres,
 };
