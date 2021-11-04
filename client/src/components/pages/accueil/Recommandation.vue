@@ -1,5 +1,5 @@
 <template>
-  <div class="container-recommandation" @click="goTo(route)">
+  <div class="container-recommandation" @click="goToDetails()">
     <div class="container-img">
       <img src="../../../assets/restaurant.png" />
     </div>
@@ -16,11 +16,12 @@ export default {
   name: "Recommandation",
 
   data: () => ({
-    route: "/restaurants",
   }),
   methods: {
-    goTo(route) {
-      this.$router.push(route);
+    goToDetails() {
+      if (this.restaurant) {
+        this.$router.push({ path: `/restaurant/${this.restaurant.id}` });
+      }
     },
   },
   props: {

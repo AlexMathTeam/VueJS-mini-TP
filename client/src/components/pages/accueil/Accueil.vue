@@ -13,7 +13,7 @@
         ></v-text-field>
       </div>
     </div>
-    <span class="span-accueil">Une envie de restaurant ? </span>
+    <span class="span-accueil">Une envie d'un restaurant ? </span>
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
@@ -22,7 +22,7 @@
         :restaurant="restaurant"
       ></Recommandation>
     </div>
-    <span class="span-accueil">Les restaurants français !</span>
+    <span class="span-accueil">Les restaurants recommande !</span>
     <div class="recommendationAccueil">
       <Recommandation
         class="positionRecommandation"
@@ -38,7 +38,7 @@
 <script>
 import Filtres from "../../../modules/Filtres";
 import Recommandation from "./Recommandation";
-import { getRestaurants, getRestaurantsCount, getRestaurantsCountFrench} from "../../../modules/api/RestaurantsAPI";
+import { getRestaurants, getRestaurantsCount} from "../../../modules/api/RestaurantsAPI";
 export default {
   components: { Recommandation },
   name: "Accueil",
@@ -55,10 +55,10 @@ export default {
       getRestaurants({page: random, pagesize: 4}).then(res => this.random = res.restaurants);
     })
 
-    getRestaurantsCountFrench().then(res => {
+    getRestaurantsCount().then(res => {
       const pageMax = Math.ceil(res/4);
       const random = Math.floor(Math.random() * pageMax);
-      getRestaurants({page: random, pagesize: 4,cuisine: 'French'}).then (res => this.listeFrance = res.restaurants);
+      getRestaurants({page: random, pagesize: 4}).then (res => this.listeFrance = res.restaurants);
 
     })
     

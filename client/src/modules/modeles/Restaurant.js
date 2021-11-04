@@ -52,7 +52,7 @@ export default class Restaurant {
 
     static convertToRestaurant(obj) {
         if (!ObjIsNull(obj)) {
-            return new Restaurant(
+            const restau = new Restaurant(
                 obj.id ?? obj._id,
                 obj.name,
                 obj.cuisine,
@@ -61,6 +61,7 @@ export default class Restaurant {
                 Adresse.convertToAdresse(obj.address),
                 obj.restaurant_id
             );
+            return restau;
         }
         return null;
     }
