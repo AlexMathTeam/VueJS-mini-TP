@@ -24,6 +24,7 @@ export async function post(path, params) {
     else {
         formParams = new FormData();
         Object.entries(params).forEach(([key, value]) => formParams.append(key, value))
+        console.log(formParams)
     }
     return (await fetch(`${url}/${path}`, {
         method: 'POST',

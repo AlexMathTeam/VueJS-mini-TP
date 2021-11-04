@@ -10,9 +10,6 @@ export async function getRestaurantsCount() {
     return (await get('restaurants/count')).data;
 }
 
-export async function getRestaurantsCountFrench() {
-    return (await get('restaurants/countfrench')).data;
-}
 
 export async function getRestaurantById(id) {
     return Restaurant.convertToRestaurant((await get(`restaurants/${id}`)).restaurant);

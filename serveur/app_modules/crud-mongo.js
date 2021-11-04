@@ -1,6 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
+var Nominatim = require('nominatim-geocoder');
+const geocoder = new Nominatim();
 //var url = 'mongodb://localhost:27017/test';
 
 // Connection URL
@@ -46,7 +48,7 @@ exports.countRestaurants = async (name) => {
 };
 
 
-exports.findRestaurants = async (page, pagesize, name, filtre) => {
+exports.findRestaurants = async (page, pagesize, name) => {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });
 	let db = client.db(dbName);
 	let reponse;
@@ -64,15 +66,9 @@ exports.findRestaurants = async (page, pagesize, name, filtre) => {
 
 			count = await db.collection('restaurants').countDocuments();
 		} else {
-			const query = {};
-			if (filtre == "name") {
-				query.name = { $regex: ".*" + name + ".*", $options: "i" };
+			let query = {
+				"name": { $regex: ".*" + name + ".*", $options: "i" }
 			}
-
-			if (filtre == "cuisine") {
-				query.cuisine = { $regex: ".*" + name + ".*", $options: "i" };
-			}
-
 			restaurants = await db.collection('restaurants')
 				.find(query)
 				.skip(page * pagesize)
@@ -101,6 +97,7 @@ exports.findRestaurants = async (page, pagesize, name, filtre) => {
 		return reponse;
 	}
 }
+
 
 
 exports.findRestaurantById = async (id) => {
@@ -136,23 +133,29 @@ exports.createRestaurant = async (formData) => {
 	let client = await MongoClient.connect(url, { useNewUrlParser: true });
 	let db = client.db(dbName);
 	let reponse;
-
 	try {
+		const address = JSON.parse(formData.address);
+		const q = `${address.building}, ${address.street}, ${address.zipcode}`;
+		const emplacement  = (await geocoder.search({q}))[0];
+		if(emplacement !== undefined) address.coord = [Number(emplacement.lon), Number(emplacement.lat)];
 		let toInsert = {
 			name: formData.nom,
-			cuisine: formData.cuisine
+			cuisine: formData.cuisine,
+			address,
+			borough: formData.borough,
+			grades:[],
 		};
 		let data = await db.collection("restaurants").insertOne(toInsert);
 		reponse = {
 			succes: true,
 			result: toInsert._id,
-			msg: "Ajout réussi " + toInsert._id
+			msg: "Ajout réussi " + toInsert._id ,
 		};
 	} catch (err) {
 		reponse = {
 			succes: false,
 			error: err,
-			msg: "erreur lors du insert"
+			msg: "erreur lors de l'ajout "
 		};
 	} finally {
 		client.close();
