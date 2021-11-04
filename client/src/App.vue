@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     height() {
-      return `calc(100vw - ${this.marginTop})`;
+      return `calc(100vh - ${this.marginTop})`;
     }
   },
   methods: {
@@ -50,10 +50,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-main.app {
-  height: calc(100vh - 100px);
 }
 
 .v-select .v-menu {
