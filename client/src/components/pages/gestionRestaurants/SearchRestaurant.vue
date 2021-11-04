@@ -53,7 +53,7 @@
 
 <script>
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
-import { timeout } from "../../../modules/api/Utils";
+import { getImageRestaurantRandom } from "../../../modules/api/ImageRestaurantRandom";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
 import _ from "lodash";
@@ -98,8 +98,12 @@ export default {
           name: this.motsCle ?? "",
         });
         this.restaurants = res.restaurants;
-        await timeout(600);
         this.count = res.count;
+
+        for (const restaurant of this.restaurants) {
+          await this.getImageRandom(restaurant);
+        }
+
         if (this.restaurants.length < 0) {
           this.msg = "Aucun restaurant trouvé";
         }
@@ -108,6 +112,13 @@ export default {
         this.msg = "Une erreur est survenue";
       } finally {
         this.load = false;
+      }
+    },
+    async getImageRandom(restaurant) {
+      try {
+        restaurant.image = await getImageRestaurantRandom();
+      } catch (e) {
+        restaurant.image = undefined;
       }
     },
     reset() {

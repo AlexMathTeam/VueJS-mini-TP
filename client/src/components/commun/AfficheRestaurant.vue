@@ -1,7 +1,7 @@
 <template>
   <div class="affichage-restaurant">
     <div class="container-aff-restau" @click="goToDetails()">
-      <div class="container-image"></div>
+      <div class="container-image" v-bind:style="image"></div>
       <div class="container-infos">
         <div class="header">{{ restaurant.name }}</div>
         <div class="part-1">
@@ -18,6 +18,7 @@
 
 <script>
 import Restaurant from "../../modules/modeles/Restaurant";
+import ObjIsNull from '../../modules/ObjIsNull';
 
 export default {
   name: "AfficheRestaurant",
@@ -34,6 +35,9 @@ export default {
       const moyen = grades.reduce((gradeA, gradeB) => gradeA.score ?? 0 + gradeB.score ?? 0)/grades.length;
       return Number(moyen).toFixed(2);
     },
+    image() {
+      return (!ObjIsNull(this.restaurant.image) && this.restaurant.image.length > 0) ? { backgroundImage: `url${this.restaurant.image}` } : {};
+    }
   },
   methods: {
     goToDetails() {
