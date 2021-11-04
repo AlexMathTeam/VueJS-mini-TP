@@ -35,6 +35,7 @@
           v-for="(restaurant, index) in restaurants"
           :key="index"
           :restaurant="restaurant"
+          :id="index"
         ></AfficheRestaurant>
       </div>
       <div class="container-spinner" v-else-if="load">
@@ -53,7 +54,6 @@
 
 <script>
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
-import { getImageRestaurantRandom } from "../../../modules/api/ImageRestaurantRandom";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
 import _ from "lodash";
@@ -100,10 +100,6 @@ export default {
         this.restaurants = res.restaurants;
         this.count = res.count;
 
-        for (const restaurant of this.restaurants) {
-          await this.getImageRandom(restaurant);
-        }
-
         if (this.restaurants.length < 0) {
           this.msg = "Aucun restaurant trouvé";
         }
@@ -112,13 +108,6 @@ export default {
         this.msg = "Une erreur est survenue";
       } finally {
         this.load = false;
-      }
-    },
-    async getImageRandom(restaurant) {
-      try {
-        restaurant.image = await getImageRestaurantRandom();
-      } catch (e) {
-        restaurant.image = undefined;
       }
     },
     reset() {

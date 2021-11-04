@@ -18,11 +18,14 @@
 
 <script>
 import Restaurant from "../../modules/modeles/Restaurant";
-import ObjIsNull from '../../modules/ObjIsNull';
 
 export default {
   name: "AfficheRestaurant",
   props: {
+    id: {
+      type: Number,
+      default: 0,
+    },
     restaurant: {
       type: Restaurant,
       required: true,
@@ -36,7 +39,7 @@ export default {
       return Number(moyen).toFixed(2);
     },
     image() {
-      return (!ObjIsNull(this.restaurant.image) && this.restaurant.image.length > 0) ? { backgroundImage: `url${this.restaurant.image}` } : {};
+      return { backgroundImage: "url(https://picsum.photos/200/300/?random&t=" + this.id +")" };
     }
   },
   methods: {
@@ -78,7 +81,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-image: url(../../assets/restaurant.jpg);
+  background-color: rgb(92, 92, 92);
   background-position: top;
   background-size: cover;
 }
