@@ -22,6 +22,7 @@
         v-for="(restaurant, index) in random"
         v-bind:key="index"
         :restaurant="restaurant"
+        :id="index"
       ></Recommandation>
     </div>
     <span class="span-accueil">Les restaurants recommande !</span>
@@ -31,6 +32,7 @@
         v-for="(restaurant, index) in listeFrance"
         v-bind:key="index"
         :restaurant="restaurant"
+        :id="index+10"
       ></Recommandation>
     </div>
     <span>{{ "teste filtre vuejs" | titlecase }}</span>
