@@ -97,9 +97,10 @@ export default {
 .recommendationAccueil {
   display: flex;
   justify-content: center;
-  margin-top: 70px;
+  margin-top: 30px;
   margin-bottom: 80px;
 }
+
 .positionRecommandation {
   margin-right: 15px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
@@ -118,16 +119,26 @@ export default {
   align-items: center;
   margin-bottom: 50px;
 }
+
 .barre-recherche-accueil {
   border-radius: 30px;
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
   background-color: white;
 }
+
 .barre-recherche-accueil.v-input {
   flex: none;
 }
+
 .container-barre-recherche-accueil {
   width: 90%;
   height: max-content;
+}
+
+.span-accueil {
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: bold;
 }
 </style>
