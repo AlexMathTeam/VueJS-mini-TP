@@ -3,6 +3,8 @@
 ## Résumé:
 Le but de ce projet est de proposer une application web permettant aux utilisateurs de chercher et créer des restaurants enregistrer dans une base de donnée.
 Il se base sur les TP 1, 2 et 3 en cours de Javascript et HTML 5 de Monsieur Buffa.
+Le serveur modifié est basé sur le serveur dans le lien suivant: http://miageprojet2.unice.fr/@api/deki/files/3049/=serveurV2.zip;
+La base de donnée est basé sur la BDD de teste utilisé pour les TP précédent: https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json;
 
 ## Client
 
@@ -14,7 +16,7 @@ Il se base sur les TP 1, 2 et 3 en cours de Javascript et HTML 5 de Monsieur Buf
 
 ### NPM Package:
 - [Vuetify](https://vuetifyjs.com): Librairie UI pour VueJS;
-- [Vue Leaflet](https://vue2-leaflet.netlify.app): Librairie UI/UX pour la création de carte et manipulation de carte (la carte d'OpenStreetMap a était utiisé);
+- [Vue Leaflet](https://vue2-leaflet.netlify.app): Librairie de création de carte et manipulation de carte (la carte d'OpenStreetMap a était utiisé);
 
 ### API:
 - [Lorem Picsum](https://picsum.photos): est une API permettant d'obtenir des images de manière aléatoire.
@@ -32,7 +34,31 @@ Il se base sur les TP 1, 2 et 3 en cours de Javascript et HTML 5 de Monsieur Buf
 
 ## Lancer l'application web
 
+Afin de tester en local, l'application web, il est nécessaire d'avoir [MongoDB](https://www.mongodb.com/fr-fr) et [NodeJS](https://nodejs.org).
+La base de donnée utlisé est celle de basse c'est a dire dans le lien à coté: 
 
+Pour tous installer :
+Si vous avez installer tous ce qui faut
+
+```
+cd serveur
+npm install
+
+cd ../client
+npm install
+```
+
+Pour lancer le serveur:
+```
+cd serveur
+node serverCrudWithMongo.js
+```
+
+Pour Lancer le client:
+```
+cd client
+npm run serve
+```
 
 ## Accueil
 - L'acceuil possède 1 barre de recherche. Dans le chargement de la page, on y voit la premiere barre de recherche qui se situe au milieu de l'écran. Ensuite, lorsqu’on descend la page celle-ci disparait pour laisser place a la barre de recherche dans le menu. 
@@ -40,6 +66,17 @@ En cherchant un mot dans la barre de recherche, celle-ci nous ramène automatiqu
 
 - Dans l’accueil nous trouvons également des fonctionnalités telles que des images de restaurants, les noms ainsi que les types de cuisines. Les restaurants défilent de manière aléatoire. Lorsqu’on en sélectionne un, cela nous ramène automatiquement sur la fiche détaillée de ce restaurant.
 
+## Gestion des Restaurants
+- La page "Gestion des Restaurants" permet d'obtenir l’un des restaurants. Chaque restaurant aura une image générée de manière aléatoire, ainsi que le nom, le type de cuisine et le score moyen du restaurant.
+
+- En cliquant sur le restaurant, vous serez redirigé vers la page "Restaurant Détails" qui affiche les détails du restaurant comme le nom, la cuisine, la position sur une carte, etc...
+
+
+## Restaurant Détails
+
+- Cette page permet d'obtenir les détails d'un restaurant. Les informations du restaurant sont chargées à partir de l'id restaurant qui est inséré dans le lien.
+
+- La page possède une carte créée à partir de la librairie [Vue Leaflet](https://vue2-leaflet.netlify.app/), elle affiche directement la position du restaurant via un marqueur défini par les coordonnées enregistrées dans la base de données.
 
 ## Ajout Restaurant
 - Dans la page ajouter, on y trouve un formulaire demandant des informations précises sur le restaurant auprès du restaurateur afin de permettre  l'enregistrement de celui ci sur le site. Dans le formulaire on y retrouve: le nom, la cuisine, la ville et l'adresse. Lorsque l'utilisateur clique sur Valider, la page fait appel au serveur pour enregistrer le restaurant dans la base de donnée. 
