@@ -26,7 +26,7 @@ Il se base sur les TP 1, 2 et 3 en cours de Javascript et HTML 5 de Monsieur Buf
 - NodeJS
 
 ### NPM Package:
-- [nominatim-geocoder](https://www.npmjs.com/package/nominatim-geocoder): Librairie permettant d'utiliser l'[API Nomination](https://nominatim.org) qui permet de d'obtenir des informations au tour des coordonnées et adresse.
+- [nominatim-geocoder](https://www.npmjs.com/package/nominatim-geocoder): Librairie permettant d'utiliser l'[API Nominatim](https://nominatim.org) qui permet de d'obtenir des informations au tour des coordonnées et adresse.
 - [mongodb](https://www.npmjs.com/package/mongodb): Pilote permettant que communiquer et d'échanger avec une base de donnée MongoDB.
 
 
@@ -43,7 +43,7 @@ En cherchant un mot dans la barre de recherche, celle-ci nous ramène automatiqu
 
 ## Ajout Restaurant
 - Dans la page ajouter, on y trouve un formulaire demandant des informations précises sur le restaurant auprès du restaurateur afin de permettre  l'enregistrement de celui ci sur le site. Dans le formulaire on y retrouve: le nom, la cuisine, la ville et l'adresse. Lorsque l'utilisateur clique sur Valider, la page fait appel au serveur pour enregistrer le restaurant dans la base de donnée. 
-Lors de l'ajout du restaurant, le serveur fait appel à l'[API Nomination](https://nominatim.org) qui récupere alors l'adresse du restaurant et retourne la position GPS du restaurant.
+Lors de l'ajout du restaurant, le serveur fait appel à l'[API Nominatim](https://nominatim.org) qui récupere alors l'adresse du restaurant et retourne la position GPS du restaurant.
 
 ## Autour de vous
 - La page affiche en plein écran une map qui se concentre automatiquement sur la position de l'utilisateur. Sur cette carte, nous avons décidé d’afficher 1000 restaurants car en charger plus prendrait trop de temps. Il est possible cliquer sur tout les points de localisation représentant les restaurants afin d’être rediriger sur le fiche détail du restaurant. Nous avons utilisé la librairie [Vue Leaflet](https://vue2-leaflet.netlify.app)
