@@ -6,7 +6,7 @@
       </header>
       <main>
         <div class="data">
-          <img src="https://picsum.photos/400/500/?random"/>
+          <img src="https://picsum.photos/400/500/?random&t=1"/>
           <p v-for="(value, libelle) in dataBody" v-bind:key="libelle" class="value"><span class="lib">{{ libelle | uppercase}}:</span> {{ value }}</p>
         </div>
         <div class="container-map-restaurant">

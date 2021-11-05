@@ -54,6 +54,7 @@ export default {
   cursor: pointer;
   border-radius: 10px;
   overflow: hidden;
+  z-index: 0;
 }
 
 .container-recommandation > .container-img {
@@ -61,6 +62,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1;
 }
 
 .container-recommandation > .container-img > img {
@@ -68,11 +70,18 @@ export default {
 }
 
 .container-recommandation > .container-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   width: 100%;
   height: max-content;
+  z-index: 2;
+  background: rgba(87, 87, 87, 0.8);
+  padding: 10px 0;
+  color: #fff;
 }
 
 .container-recommandation > .container-details > span {
