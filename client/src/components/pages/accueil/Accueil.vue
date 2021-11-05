@@ -35,7 +35,6 @@
         :id="index+10"
       ></Recommandation>
     </div>
-    <span>{{ "teste filtre vuejs" | titlecase }}</span>
   </div>
 </template>
 
