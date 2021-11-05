@@ -42,7 +42,7 @@
             ></v-text-field>
 
             <v-btn class="mr-4" @click="validate" :disabled="!valid">
-              Validate
+              Envoyer
             </v-btn>
             <v-btn class="mr-4" @click="clear"> Effacer </v-btn>
           </v-container>
