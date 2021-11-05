@@ -41,6 +41,7 @@ export default {
 
 <style>
 .container-recommandation {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -51,17 +52,19 @@ export default {
   min-height: 350px;
   max-height: 400px;
   cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .container-recommandation > .container-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 
 .container-recommandation > .container-img > img {
   width: 100%;
-}
-img {
-  border-radius: 5px;
 }
 
 .container-recommandation > .container-details {

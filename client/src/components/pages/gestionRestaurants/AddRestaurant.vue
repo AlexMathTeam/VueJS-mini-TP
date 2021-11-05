@@ -143,31 +143,31 @@ export default {
 </script>
 
 <style>
-.divFormulaireAdd {
-  width: 50%;
-  height: max-content;
-  background-color: white;
-  opacity: 90%;
-  margin-top: 60px;
-}
-.divPhotoAdd {
-  display: flex;
-  background-image: url(../../../assets/restaurantAdd.jpg);
-  max-width: 100%;
-  min-width: 500px;
-  width: 100vw;
-  height: 734px;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  margin: 0% 14.5%;
-}
+
 .templateAdd {
   display: flex;
-  margin: 0 auto;
+  align-content: center;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  height: 100%;
 }
+
+.divPhotoAdd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1100px;
+  height: 80%;
+  background-image: url(../../../assets/restaurantAdd.jpg);
+  margin: 20px 0;
+}
+
+.divFormulaireAdd {
+  width: 80%;
+  height: 80%;
+  background: rgba(255, 255, 255, 65%);
+}
+
 .v-dialog__container {
   display: block;
 }

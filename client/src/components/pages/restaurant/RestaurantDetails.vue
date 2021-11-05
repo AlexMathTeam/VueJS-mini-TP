@@ -1,11 +1,12 @@
 <template>
   <div class="container-restaurant-detail">
     <article class="container-restaurant" v-if="restaurant !== undefined">
-      <header v-bind:style="headerBackground">
+      <header>
         {{ restaurant.name | uppercase }}
       </header>
       <main>
         <div class="data">
+          <img src="https://picsum.photos/400/500/?random"/>
           <p v-for="(value, libelle) in dataBody" v-bind:key="libelle" class="value"><span class="lib">{{ libelle | uppercase}}:</span> {{ value }}</p>
         </div>
         <div class="container-map-restaurant">
@@ -33,19 +34,12 @@
 <script>
 import { getRestaurantById } from "../../../modules/api/RestaurantsAPI";
 import Filtres from "../../../modules/Filtres";
-import ObjIsNull from "../../../modules/ObjIsNull";
 import Map from "../../commun/Map.vue";
 
 export default {
   name: "Restaurant",
   components: {
     Map,
-  },
-  props: {
-    image: {
-      type: String,
-      default: undefined,
-    },
   },
   data: () => ({
     id: "",
@@ -59,16 +53,6 @@ export default {
     this.searchRestaurant();
   },
   computed: {
-    headerBackground() {
-      return !ObjIsNull(this.image)
-        ? {
-            backgroundImage: `url("${this.image}")`,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }
-        : { background: "limegreen" };
-    },
     center() {
       const { coord } = this.restaurant.adresse;
       return [coord[1] ?? 0, coord[0] ?? 0];
@@ -123,6 +107,7 @@ export default {
   font-size: 1.5em;
   font-weight: bold;
   color: #fff;
+  background: limegreen;
 }
 
 .container-restaurant > main {
