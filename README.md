@@ -6,6 +6,8 @@ Il se base sur les TP 1, 2 et 3 en cours de Javascript et HTML 5 de Monsieur Buf
 Le serveur modifié est basé sur le serveur dans le lien suivant: http://miageprojet2.unice.fr/@api/deki/files/3049/=serveurV2.zip;
 La base de donnée est basé sur la BDD de teste utilisé pour les TP précédent: https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json;
 
+[Video de présentation](https://youtu.be/lLbuPMI6gDE)
+
 ## Client
 
 ### Technologie
