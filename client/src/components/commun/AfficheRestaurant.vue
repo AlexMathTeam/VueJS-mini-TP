@@ -1,7 +1,7 @@
 <template>
   <div class="affichage-restaurant">
     <div class="container-aff-restau" @click="goToDetails()">
-      <div class="container-image"></div>
+      <div class="container-image" v-bind:style="image"></div>
       <div class="container-infos">
         <div class="header">{{ restaurant.name }}</div>
         <div class="part-1">
@@ -22,6 +22,10 @@ import Restaurant from "../../modules/modeles/Restaurant";
 export default {
   name: "AfficheRestaurant",
   props: {
+    id: {
+      type: Number,
+      default: 0,
+    },
     restaurant: {
       type: Restaurant,
       required: true,
@@ -34,6 +38,9 @@ export default {
       const moyen = grades.reduce((gradeA, gradeB) => gradeA.score ?? 0 + gradeB.score ?? 0)/grades.length;
       return Number(moyen).toFixed(2);
     },
+    image() {
+      return { backgroundImage: "url(https://picsum.photos/200/300/?random&t=" + this.id +")" };
+    }
   },
   methods: {
     goToDetails() {
@@ -74,7 +81,7 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-image: url(../../assets/restaurant.jpg);
+  background-color: rgb(92, 92, 92);
   background-position: top;
   background-size: cover;
 }

@@ -36,6 +36,7 @@
           v-for="(restaurant, index) in restaurants"
           :key="index"
           :restaurant="restaurant"
+          :id="index"
         ></AfficheRestaurant>
         <span v-if="restaurants.length < 1" class="no-found">Aucun restaurant ne correspond à votre recherche!</span>
       </div>
@@ -55,7 +56,6 @@
 
 <script>
 import { getRestaurants } from "../../../modules/api/RestaurantsAPI";
-import { timeout } from "../../../modules/api/Utils";
 import AfficheRestaurant from "../../commun/AfficheRestaurant.vue";
 
 import _ from "lodash";
@@ -100,8 +100,8 @@ export default {
           name: this.motsCle ?? "",
         });
         this.restaurants = res.restaurants;
-        await timeout(600);
         this.count = res.count;
+
         if (this.restaurants.length < 0) {
           this.msg = "Aucun restaurant trouvé";
         }

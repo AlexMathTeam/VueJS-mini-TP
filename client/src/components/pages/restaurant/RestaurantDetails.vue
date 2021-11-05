@@ -9,7 +9,7 @@
           <p v-for="(value, libelle) in dataBody" v-bind:key="libelle" class="value"><span class="lib">{{ libelle | uppercase}}:</span> {{ value }}</p>
         </div>
         <div class="container-map-restaurant">
-            <Map
+            <Map class="map-restaurant"
               :center="center"
               :zoom="20"
               :restaurants="[restaurant]"
@@ -156,5 +156,9 @@ export default {
 .container-map-restaurant {
   width: 60%;
   height: 100%;
+}
+
+.container-map-restaurant > .map-restaurant {
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 50%);
 }
 </style>
