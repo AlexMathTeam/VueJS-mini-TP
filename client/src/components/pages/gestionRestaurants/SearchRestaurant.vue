@@ -18,7 +18,7 @@
         :total-visible="6"
         color="green darken-2"
         @input="paginationChange()"
-        v-if="!load && msg === undefined"
+        v-if="!load && msg === undefined && restaurants.length > 0"
       ></v-pagination>
       <v-select
         v-model="nbParPage"
@@ -26,7 +26,8 @@
         :items="itemsNbParPage"
         solo
         @input="paginationChange()"
-        v-if="!load && msg === undefined"
+        class="nb-el-page"
+        v-if="!load && msg === undefined && restaurants.length > 0"
       ></v-select>
     </header>
     <main v-bind:class="{ loader: load }">
@@ -36,6 +37,7 @@
           :key="index"
           :restaurant="restaurant"
         ></AfficheRestaurant>
+        <span v-if="restaurants.length < 1" class="no-found">Aucun restaurant ne correspond à votre recherche!</span>
       </div>
       <div class="container-spinner" v-else-if="load">
         <v-progress-circular
@@ -183,5 +185,15 @@ export default {
   justify-content: center;
   width: 100%;
   height: 60%;
+}
+
+.no-found {
+  padding: 20% 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.nb-el-page {
+  width: 60px;
 }
 </style>
