@@ -67,8 +67,8 @@ export default {
   },
   data: () => ({
     page: 1,
-    nbParPage: 20,
-    itemsNbParPage: [5, 10, 15, 20, 30],
+    nbParPage: 18,
+    itemsNbParPage: [5, 10, 18],
     name: "",
     restaurants: [],
     count: 0,
